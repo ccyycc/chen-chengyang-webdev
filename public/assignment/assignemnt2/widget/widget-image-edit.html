@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1 user-scalable=no">
+
+    <title>Edit Image Widget</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!--<link href="../vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- header -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div>
+            <!--back arrow-->
+            <a href="widget-list.html"
+               class=" navbar-brand">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="navbar-brand"
+               href="widget-image-edit.html">Widget Edit</a>
+            <!--ok arrow-->
+            <a href="widget-list.html"
+               class=" navbar-brand pull-right right-most-padding">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!--body-->
+<div class="container-fluid theme-showcase first-row"
+     role="main">
+
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="Image widget name"
+           value="My image Widget1 name"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="Image widget Text"
+           value="My image Widget1 text "
+           id="text"/>
+
+    <label for="url">URL</label>
+    <input class="form-control"
+           placeholder="image-url"
+           value="www.domain.com/image/image1.jpg"
+           id="url"/>
+
+    <label for="width">Width</label>
+    <select id="width" class="form-control">
+        <option>100%</option>
+        <option>75%</option>
+        <option>50%</option>
+        <option>25%</option>
+        <option>10%</option>
+    </select>
+
+
+    <label for="file">Upload</label>
+    <input id="file" multiple type="file" class="form-control"/>
+
+    <a href="#"
+       class="btn btn-block btn-success">Upload</a>
+
+    <a href="widget-list.html"
+       class="btn btn-block btn-danger">Delete</a>
+</div>
+
+
+<!-- footer -->
+<nav class="navbar navbar-inverse navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div>
+            <ul class="nav navbar-nav list-inline"
+                id="ul-footer">
+                <li><a href="../index.html"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li><a href="../user/profile.html"><span class="glyphicon glyphicon-user"></span></a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+</body>
+</html>

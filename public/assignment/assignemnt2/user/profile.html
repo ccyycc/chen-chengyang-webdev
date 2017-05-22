@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1 user-scalable=no">
+
+    <title>Profile</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <!--<link href="../vendor/bootstrap/dist/css/bootstrap.min.css"-->
+    <!--rel="stylesheet"/>-->
+    <link href="../css/style.css"
+          rel="stylesheet"/>
+</head>
+
+<body>
+<!-- header -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div>
+            <!--current page-->
+            <span class="navbar-brand">Profile</span>
+            <!--ok button-->
+            <a href="profile.html"
+               id="right-most-padding"
+               class="  navbar-brand pull-right">
+                <span class="glyphicon glyphicon-ok"></span>
+            </a>
+        </div>
+    </div>
+</nav>
+
+<!--body-->
+<div class="container-fluid first-row">
+    <form>
+        <!--Username-->
+        <div class="form-group">
+            <label for="username">Username</label> <input type="text"
+                                                          class="form-control"
+                                                          id="username"
+                                                          placeholder="Username"
+                                                          value="Admin123">
+        </div>
+        <!--Email address-->
+        <div class="form-group">
+            <label for="email">Email address</label> <input type="email"
+                                                            class="form-control"
+                                                            id="email"
+                                                            placeholder="alice@wonderland.com"
+                                                            value="Admin123@gmail.com">
+
+        </div>
+        <!--First name-->
+        <div class="form-group">
+            <label for="first-name">First Name</label> <input type="text"
+                                                              class="form-control"
+                                                              id="first-name"
+                                                              placeholder="Alice"
+                                                              value="Alice">
+
+        </div>
+        <!--Last name-->
+        <div class="form-group">
+            <label for="last-name">Last Name</label> <input type="text"
+                                                            class="form-control"
+                                                            id="last-name"
+                                                            placeholder="Wonderland"
+                                                            value="Alice-last-name">
+        </div>
+    </form>
+    <!--Save change button-->
+    <a class="btn btn-success btn-block"
+       href="profile.html">Save Change </a>
+    <!--websites button-->
+    <a class="btn btn-primary btn-block"
+       href="../website/website-list.html">Go To Websites </a>
+    <!--Log out button-->
+    <a class="btn btn-danger  btn-block"
+       href="login.html">Logout</a>
+</div>
+
+
+<!--footer-->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="pull-right">
+        <a href="../index.html"
+           class="navbar-text navbar-link">
+            <span class="glyphicon glyphicon-home"></span>
+        </a>
+    </div>
+</nav>
+
+</body>
+</html>
