@@ -4,8 +4,8 @@
         .controller('twoColHeaderController', twoColHeaderController);
 
 
-    function twoColHeaderController($location, $routeParams,
-                                    websiteService, userService) {
+    function twoColHeaderController($location,$routeParams,
+                                   websiteService,userService) {
         // var headerModel = this;
         // headerModel.userId = $routeParams['uid'];
         // console.log(headerModel.userId);
