@@ -1,0 +1,61 @@
+<!--header-->
+<div ng-include="'./views/common/header/one-col-header.view.client.html'"></div>
+
+
+<!--body-->
+<div class="container-fluid first-row">
+    <div ng-show="model.message"
+         class="alert alert-success">
+        {{model.message}}
+    </div>
+    <form>
+        <!--Username-->
+        <div class="form-group">
+            <label for="username">Username</label> <input readonly
+                                                          type="text"
+                                                          class="form-control"
+                                                          id="username"
+                                                          placeholder="Username"
+                                                          ng-model="model.user.username">
+        </div>
+        <!--Email address-->
+        <div class="form-group">
+            <label for="email">Email address</label> <input type="email"
+                                                            class="form-control"
+                                                            id="email"
+                                                            placeholder="alice@wonderland.com"
+                                                            ng-model="model.user.email">
+
+        </div>
+        <!--First name-->
+        <div class="form-group">
+            <label for="first-name">First Name</label> <input type="text"
+                                                              class="form-control"
+                                                              id="first-name"
+                                                              placeholder="Alice"
+                                                              ng-model="model.user.firstName">
+
+        </div>
+        <!--Last name-->
+        <div class="form-group">
+            <label for="last-name">Last Name</label> <input type="text"
+                                                            class="form-control"
+                                                            id="last-name"
+                                                            placeholder="Wonderland"
+                                                            ng-model="model.user.lastName">
+        </div>
+    </form>
+    <!--Save change button-->
+    <a class="btn btn-success btn-block"
+       ng-click="model.updateProfile()">Save Change </a>
+
+    <!--websites button-->
+    <a class="btn btn-primary btn-block"
+       href="#!/user/{{model.userId}}/website">Go To Websites </a>
+    <!--Log out button-->
+    <a class="btn btn-danger  btn-block"
+       href="#!/login">Logout</a>
+</div>
+
+<!--header-->
+<div ng-include="'./views/common/footer/footer.view.client.html'"></div>

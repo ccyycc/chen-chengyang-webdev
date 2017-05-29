@@ -1,0 +1,38 @@
+<!--body-->
+<div class="container-fluid theme-showcase first-row"
+     role="main">
+
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="YouTube widget name"
+           id="name"
+           ng-model="model.widget.name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="YouTube widget text"
+           ng-model="model.widget.text"
+           id="text"/>
+
+    <label for="width">Width</label>
+    <select id="width"
+            class="form-control"
+            ng-model="model.widget.width">
+        <option ng-selected="model.widget.width=='100%'">100%</option>
+        <option ng-selected="model.widget.width=='75%'">75%</option>
+        <option ng-selected="model.widget.width=='50%'">50%</option>
+        <option ng-selected="model.widget.width=='25%'">25%</option>
+        <option ng-selected="model.widget.width=='10%'">10%</option>
+    </select>
+
+
+    <label for="url">Url</label>
+    <input id="url"
+           class="form-control"
+           placeholder="url"
+           ng-model="model.widget.url"/>
+
+    <a ng-click="model.deleteWidget()"
+       class="btn btn-block btn-danger">Delete</a>
+
+</div>

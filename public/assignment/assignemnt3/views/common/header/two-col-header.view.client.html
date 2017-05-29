@@ -1,0 +1,45 @@
+<nav class="navbar navbar-inverse navbar-fixed-top"
+     style="height: 50px">
+    <div class="navbar-header"
+         style="width: 100%"
+         ng-controller="twoColHeaderController as headerController">
+        <div class="col-xs-4 hidden-xs">
+            <!--left panel left arrow-->
+            <a class="navbar-brand"
+               href="{{model.leftBack}}">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+
+            <!--left panel section name-->
+            <span class="navbar-brand"> {{model.leftHeader}} </span>
+
+            <!--&lt;!&ndash;left panel operation&ndash;&gt;-->
+            <!--<a ng-click="model.leftTopRightOperation()"-->
+            <!--class="navbar-brand"-->
+            <!--style="position: absolute; right:0px;">-->
+            <!--<span class={{model.leftTopRightOperationIcon}}></span>-->
+            <!--</a>-->
+
+        </div>
+        <div class="col-sm-8">
+            <div class="navbar-header">
+                <!--left arrow-->
+                <a class="navbar-brand visible-xs"
+                   href="{{model.rightBack}}">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+
+                <!--section name-->
+                <span class="navbar-brand">
+                    {{model.rightHeader}}
+                </span>
+
+                <!--operation-->
+                <a ng-click="model.rightTopRightOperation()"
+                   class="navbar-brand navbar-right-operation">
+                    <span class={{model.rightTopRightOperationIcon}}></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

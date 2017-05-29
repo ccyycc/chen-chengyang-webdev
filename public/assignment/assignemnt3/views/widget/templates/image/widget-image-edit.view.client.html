@@ -1,0 +1,46 @@
+<!--header-->
+<div ng-include="'./views/common/header/one-col-header.view.client.html'"></div>
+
+<!--body-->
+<div class="container-fluid">
+
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="facebook"
+           ng-model="model.widget.name"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="facebook"
+           ng-model="model.widget.text"
+           id="text"/>
+
+    <label for="width">Width</label>
+    <select id="width"
+            class="form-control"
+            ng-model="model.widget.width">
+        <option ng-selected="model.widget.width=='100%'">100%</option>
+        <option ng-selected="model.widget.width=='75%'">75%</option>
+        <option ng-selected="model.widget.width=='50%'">50%</option>
+        <option ng-selected="model.widget.width=='25%'">25%</option>
+        <option ng-selected="model.widget.width=='10%'">10%</option>
+    </select>
+
+
+    <label for="url">Url</label>
+    <input id="url"
+           class="form-control"
+           placeholder="url"
+           ng-model="model.widget.url"/>
+
+    <label for="file">Upload</label>
+    <input id="file" multiple type="file" class="form-control"/>
+
+    <a href=""
+       class="btn btn-block btn-success">Upload Image</a>
+
+    <a ng-click="model.deleteWidget()"
+       class="btn btn-block btn-danger">Delete</a>
+
+</div>
