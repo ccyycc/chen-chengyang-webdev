@@ -1,0 +1,52 @@
+<!--header-->
+<div ng-include="'./views/common/header/one-col-header.view.client.html'"></div>
+<!--body-->
+<div class="container-fluid first-row">
+
+    <h1>Register</h1>
+    <div ng-show="model.message"
+         class="alert alert-danger">
+        {{model.message}}
+    </div>
+
+    <form>
+        <!--enter user name -->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input ng-model="model.username"
+                   type="text"
+                   id="username"
+                   class="form-control"
+                   placeholder="user123"/>
+        </div>
+        <!--enter password-->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input ng-model="model.password"
+                   type="password"
+                   id="password"
+                   class="form-control"
+                   placeholder="password123"/>
+        </div>
+        <!--re-enter password-->
+        <div class="form-group">
+            <label for="reEnterPassword">Re-enter password</label>
+            <input ng-model="model.reEnterPassword"
+                   type="password"
+                   id="reEnterPassword"
+                   class="form-control"
+                   placeholder="password123"/>
+        </div>
+    </form>
+
+    <!--register button-->
+    <a ng-click="model.register()"
+       class="btn btn-success btn-block">Register</a>
+
+    <!--cancel button-->
+    <a class="btn btn-danger  btn-block"
+       href="#!/login">Cancel</a>
+</div>
+
+<!--header-->
+<div ng-include="'./views/common/footer/footer.view.client.html'"></div>
