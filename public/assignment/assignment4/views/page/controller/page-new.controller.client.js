@@ -41,7 +41,9 @@
         function createNewPage() {
             model.page.wid = model.wid;
             pageService.createPage(model.wid, model.page)
-                .then(navToPage);
+                .then(navToPage,function(){
+                    alert("fail to create a page, please try again.")
+                });
         }
 
         function navToPage() {

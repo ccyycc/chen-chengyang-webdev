@@ -1,7 +1,8 @@
 var app = require('../../express');
+
+// multer: support upload image.
 var multer = require('multer'); // npm install multer --save
 var upload = multer({dest: __dirname + "/../../public/assignment/assignment4/uploads"});
-// const app = express();
 
 var widgets = [
     {"_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -22,12 +23,13 @@ var widgets = [
 
 app.post('/api/page/:pid/widget', createWidget);
 app.get('/api/page/:pid/widget', findAllWidgetForPage);
-app.post('/page/:pid/widget', reArrangeWidgets);
 app.get('/api/widget/:wgid', findWidgetById);
 app.put('/api/widget/:wgid', updateWidget);
 app.delete('/api/widget/:wgid', deleteWidget);
+// update file.
 app.post("/api/upload", upload.single('myFile'), uploadImage);
-
+// for re-arrange widgets.
+app.post('/page/:pid/widget', reArrangeWidgets);
 
 function reArrangeWidgets(req, res) {
     var pid = req.params.pid;
@@ -40,36 +42,43 @@ function reArrangeWidgets(req, res) {
 
     for (var w in widgets) {
         if (widgets[w].pageId === pid) {
-            specificWidgetIndex +=1;
-            if (specificWidgetIndex === min){
+            specificWidgetIndex += 1;
+            if (specificWidgetIndex === min) {
                 min = w;
             }
-            if(specificWidgetIndex === max){
+            if (specificWidgetIndex === max) {
                 max = w;
                 var buffer = widgets[min];
-                widgets[min]= widgets[max];
-                widgets[max]=buffer;
+                widgets[min] = widgets[max];
+                widgets[max] = buffer;
                 res.status(200).send("rearrange successfully");
                 return;
             }
         }
     }
+    res.status(500).send("unexpected condition.");
 }
 
 
 function uploadImage(req, res) {
-    // if (req.file === undefined) {
-    //     res.status(404);
-    //     return;
-    // }
 
-    var widgetId = req.body.widgetId;
-    var width = req.body.width;
-    var myFile = req.file;
+
 
     var userId = req.body.userId;
     var websiteId = req.body.websiteId;
     var pageId = req.body.pageId;
+    var widgetId = req.body.widgetId;
+    var width = req.body.width;
+    var myFile = req.file;
+
+    var callbackUrl = "../assignment/assignment4/index.html#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/";
+
+    if (req.file === undefined) {
+        res.status(404).send("image does not exit").redirect(callbackUrl);
+        return;
+    }
+
+
 
     var originalname = myFile.originalname; // file name on user's computer
     var filename = myFile.filename;     // new file name in upload folder
@@ -90,7 +99,6 @@ function uploadImage(req, res) {
         localUpdateWidgetWithId(widgetId, widget)
     }
 
-    var callbackUrl = "../assignment/assignment4/index.html#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/";
 
     // if (widget.wgid === undefined) {
     //     createWidgetWithNoRes(widget)

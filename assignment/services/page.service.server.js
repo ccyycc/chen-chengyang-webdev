@@ -1,14 +1,10 @@
-
-
 var app = require('../../express');
-// const app = express();
 
 var pages = [
     {"_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
     {"_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
     {"_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"}
 ];
-
 
 app.post('/api/website/:wid/page', createPage);
 app.get('/api/website/:wid/page', findAllPagesForWebsite);
@@ -40,7 +36,6 @@ function findAllPagesForWebsite(req, res) {
 
 function findPageById(req, res) {
     var pid = req.params.pid + "";
-
     var result_page = pages.find(function (page) {
         return pid === page._id;
     });
@@ -72,7 +67,7 @@ function deletePage(req, res) {
         return;
     }
     pages.splice(index, 1);
-    res.status(200).send("");
+    res.status(200).send("page delete successfully");
 
 }
 

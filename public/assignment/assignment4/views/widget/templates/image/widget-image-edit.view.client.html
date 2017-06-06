@@ -34,16 +34,12 @@
            placeholder="url"
            ng-model="model.widget.url"/>
 
-    <!--<label for="file">Upload</label>-->
-    <!--<input id="file" multiple type="file" class="form-control"/>-->
 
-
-
-    <a class="btn btn-info btn-block"
-       ng-click="model.searchOnFlickr()">
-       <!--href="#!/widget/{{model.widget._id}}/search">-->
-        Search
+    <a class="btn btn-success btn-block wd-action-Button"
+       ng-click="model.topRightOperation()">
+        Save
     </a>
+
 
     <!--<form action="/api/upload" method="post" enctype="multipart/form-data">-->
     <form action="/api/upload" method="post" enctype="multipart/form-data">
@@ -53,13 +49,14 @@
         <input name="websiteId" value="{{model.websiteId}}" style="display: none"/>
         <input name="pageId" value="{{model.pageId}}" style="display: none"/>
         <input name="widgetId" value="{{model.widget._id}}" style="display: none"/>
-        <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
+        <button type="submit" class="btn btn-block btn-primary wd-action-Button">Upload Image & Save </button>
     </form>
 
-
-
-    <!--<a href=""-->
-    <!--class="btn btn-block btn-success">Upload Image</a>-->
+    <a class="btn btn-info btn-block wd-action-Button"
+       ng-click="model.searchOnFlickr()">
+        <!--href="#!/widget/{{model.widget._id}}/search">-->
+        Search on flickr
+    </a>
 
 </div>
 

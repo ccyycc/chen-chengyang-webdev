@@ -3,8 +3,7 @@
         .module('WebAppMaker')
         .controller('websiteNewController', websiteNewController);
 
-    function websiteNewController($location, $routeParams,
-                                  websiteService, userService) {
+    function websiteNewController($location, $routeParams, websiteService) {
         var model = this;
         //event handler
         model.createNewWebsite = createNewWebsite;
@@ -17,15 +16,15 @@
             websiteService.findWebsitesByUser(model.userId)
                 .then(
                     function (websites) {
-                        model.websites=websites;
+                        model.websites = websites;
                     },
-                    function (){
-                        model.websites= undefined;
+                    function () {
+                        model.websites = undefined;
                     }
                 );
             //header
             // left panel
-            model.leftBack = '#!/user/' + model.userId + "/website"
+            model.leftBack = '#!/user/' + model.userId + "/website";
             model.leftHeader = "Website List";
             model.leftTopRightOperationIcon = 'glyphicon glyphicon-plus';
             // model.leftTopRightOperation = newWebsite;
@@ -40,11 +39,15 @@
 
         function createNewWebsite() {
             websiteService.createWebsite(model.userId, model.website)
-                .then(
-                    function(){
-                        $location.url('/user/' + model.userId + "/website");
-                    }
-                );
+                .then(navToWebsite,error);
+        }
+
+        function navToWebsite(){
+            $location.url('/user/' + model.userId + "/website");
+
+        }
+        function error(){
+            alert("error, please try again");
         }
 
     }

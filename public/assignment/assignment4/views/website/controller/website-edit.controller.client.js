@@ -3,8 +3,7 @@
         .module('WebAppMaker')
         .controller('websiteEditController', websiteEditController);
 
-    function websiteEditController($location, $routeParams,
-                                   websiteService, userService) {
+    function websiteEditController($location, $routeParams, websiteService) {
         var model = this;
 
         //event handler
@@ -50,17 +49,20 @@
 
         function updateWebsite() {
             websiteService.updateWebsite(model.websiteId, model.website)
-                .then(navToWebsite);
+                .then(navToWebsite, error);
         }
 
         function deleteWebsite() {
             websiteService.deleteWebsite(model.websiteId)
-                .then(navToWebsite)
-
+                .then(navToWebsite, error);
         }
 
         function navToWebsite() {
             $location.url('/user/' + model.userId + "/website");
+        }
+
+        function error() {
+            alert("error, please try again");
         }
     }
 })();

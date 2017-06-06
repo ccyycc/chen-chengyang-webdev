@@ -20,6 +20,7 @@ body {
 
 /*cunstum*/
 
+.wd-action-Button,
 input.form-control,
 textarea.form-control,
 select.form-control {
@@ -40,7 +41,7 @@ select.form-control {
     color: greenyellow;
     background-color: transparent;
 }
-
+div.flickr-body,
 body {
     padding-top: 50px;
     padding-bottom: 50px;
@@ -165,7 +166,7 @@ a:focus {
 }
 
 @media (width) {
-    .navbar .navbar-nav > li {
+    nav#buttonNav .navbar-nav > li {
         float: left;
     }
 }
@@ -173,6 +174,8 @@ a:focus {
 div.col-xs-4 {
     padding-left: 0;
 }
+
+
 
 
 

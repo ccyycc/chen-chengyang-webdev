@@ -17,6 +17,10 @@
                 .then(
                     function(pages){
                         model.pages=pages;
+                    },
+                    function(){
+                        alert("cannot find pages for websites");
+                        $location.url('/user/' + model.userId + '/website');
                     }
                 );
 

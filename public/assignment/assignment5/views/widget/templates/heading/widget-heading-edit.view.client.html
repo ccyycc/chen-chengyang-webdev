@@ -1,0 +1,28 @@
+<!--body-->
+<div class="container-fluid theme-showcase first-row"
+     role="main">
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="name"
+           ng-model="model.widget.name"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="text"
+           ng-model="model.widget.text"
+           id="text"/>
+
+    <label for="size">Size</label>
+    <select id="size"
+            data-ng-model="model.widget.size"
+            class="form-control">
+        <option ng-repeat="size in model.sizes"
+                ng-init="model.widget.size = model.widget.size || model.sizes[1]"
+                ng-selected="model.widget.size == size"
+                data-ng-value='size'>
+            {{size}}
+        </option>
+    </select>
+
+</div>

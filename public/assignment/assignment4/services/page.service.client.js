@@ -13,34 +13,34 @@
         function createPage(wid, page) {
             var url = "/api/website/" + wid + "/page";
             return $http.post(url,page)
-                .then(returnData);
+                .then(extractData);
         }
 
         function findPageByWebsiteId(wid) {
             var url = "/api/website/" + wid + "/page";
             return $http.get(url)
-                .then(returnData);
+                .then(extractData);
         }
 
         function findPageById(pid) {
             var url = "/api/page/"+pid;
             return $http.get(url)
-                .then(returnData);
+                .then(extractData);
         }
 
         function updatePage(pid, page) {
             var url = "/api/page/"+pid;
             return $http.put(url,page)
-                .then(returnData);
+                .then(extractData);
         }
 
         function deletePage(pid) {
             var url = "/api/page/"+pid;
             return $http.delete(url)
-                .then(returnData);
+                .then(extractData);
         }
 
-        function returnData(response) {
+        function extractData(response) {
             return response.data;
         }
     }

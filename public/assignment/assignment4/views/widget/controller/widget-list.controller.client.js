@@ -3,8 +3,7 @@
         .module('WebAppMaker')
         .controller('widgetListController', widgetListController);
 
-    function widgetListController($location, $routeParams,
-                                  widgetService, $sce) {
+    function widgetListController($location, $routeParams, widgetService, $sce) {
         var model = this;
 
 
@@ -25,7 +24,7 @@
                     function (widgets) {
                         model.widgets = widgets;
                     },
-                    function(){
+                    function () {
                         alert("cound not find widgets with page id");
                     }
                 );
@@ -33,7 +32,7 @@
             //header
             model.header = "Widget List";
             model.back = "#!/user/" + model.userId + "/website/" + model.websiteId + "/page";
-            model.topRightOperationIcon = 'glyphicon glyphicon-plus'
+            model.topRightOperationIcon = 'glyphicon glyphicon-plus';
             model.topRightOperation = newWidget;
         }
 
