@@ -12,42 +12,48 @@
 
         function init() {
             model.userId = $routeParams['uid'];
-            model.wid = $routeParams['wid'];
+            model.websiteId = $routeParams['wid'];
             
-            pageService.findPageByWebsiteId(model.wid)
+            pageService.findPageByWebsiteId(model.websiteId)
                 .then(
                     function (pages){
                         model.pages = pages;
                     },
                     function(){
                         alert("cannot find pages with website id");
+                        navToWebsite();
+
                     }
                 );
 
             //header
             //left panel
             model.leftHeader = "Page List";
-            model.leftBack = '#!/user/' + model.userId + "/website/" + model.wid + "/page";
+            model.leftBack = '#!/user/' + model.userId + "/website/" + model.websiteId + "/page";
             // model.leftTopRightOperationIcon = 'glyphicon glyphicon-plus';
             // model.leftTopRightOperation = newPage;
 
             //right panel
             model.rightHeader = "New page ";
-            model.rightBack = '#!/user/' + model.userId + "/website/" + model.wid + "/page";
+            model.rightBack = '#!/user/' + model.userId + "/website/" + model.websiteId + "/page";
             model.rightTopRightOperationIcon = 'glyphicon glyphicon-ok';
             model.rightTopRightOperation = model.createNewPage;
         }
 
         function createNewPage() {
-            model.page.wid = model.wid;
-            pageService.createPage(model.wid, model.page)
+            model.page.wid = model.websiteId;
+            pageService.createPage(model.websiteId, model.page)
                 .then(navToPage,function(){
                     alert("fail to create a page, please try again.")
                 });
         }
 
+        function navToWebsite() {
+            $location.url('/user/' + model.userId + "/website/");
+        }
+
         function navToPage() {
-            $location.url('/user/' + model.userId + "/website/" + model.wid + "/page");
+            $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
         }
     }
 })();

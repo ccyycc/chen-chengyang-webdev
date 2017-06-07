@@ -79,11 +79,9 @@ function uploadImage(req, res) {
     var callbackUrl = "../assignment/assignment4/index.html#!/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/";
 
     if (req.file === undefined) {
-        res.status(404).send("image does not exit").redirect(callbackUrl);
+        res.status(404).redirect(callbackUrl);
         return;
     }
-
-
 
     var originalname = myFile.originalname; // file name on user's computer
     var filename = myFile.filename;     // new file name in upload folder

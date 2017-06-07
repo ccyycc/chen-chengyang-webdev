@@ -22,6 +22,7 @@
                     },
                     function(){
                         alert("cannot find pages with website id");
+                        navToWebsite();
                     }
                 );
             pageService.findPageById(model.pageId)
@@ -31,6 +32,7 @@
                     },
                     function(){
                         alert("cannot find page with page id");
+                        navToPage();
                     }
                 );
 
@@ -56,10 +58,14 @@
                 .then(navToPage,error);
         }
 
+
         function navToPage() {
             $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
         }
 
+        function navToWebsite() {
+            $location.url('/user/' + model.userId + "/website/");
+        }
         function error(){
             alert("error, try again");
         }

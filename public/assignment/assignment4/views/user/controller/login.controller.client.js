@@ -50,7 +50,7 @@
 
         function sendMessage(message) {
             model.message = message;
-            timeOut(1500);
+            timeOut(5000);
         }
 
         function timeOut(t) {

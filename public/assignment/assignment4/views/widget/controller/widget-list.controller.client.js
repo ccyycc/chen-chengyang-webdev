@@ -26,6 +26,7 @@
                     },
                     function () {
                         alert("cound not find widgets with page id");
+                        navToPage();
                     }
                 );
 
@@ -63,6 +64,14 @@
 
         function newWidget() {
             $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget/new");
+        }
+
+        function navToPage() {
+            $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
+        }
+
+        function navToWebsite() {
+            $location.url('/user/' + model.userId + "/website/");
         }
 
     }

@@ -30,7 +30,8 @@
                         model.website = website;
                     },
                     function () {
-                        alert("website is not exited");
+                        alert("website is not exited")
+                        navToWebsite();
                     }
                 );
 
@@ -60,6 +61,11 @@
         function navToWebsite() {
             $location.url('/user/' + model.userId + "/website");
         }
+
+        function navToPage() {
+            $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
+        }
+
 
         function error() {
             alert("error, please try again");
