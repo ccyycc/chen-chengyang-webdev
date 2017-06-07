@@ -5,6 +5,10 @@ var multer = require('multer'); // npm install multer --save
 var upload = multer({dest: __dirname + "/../../public/assignment/assignment4/uploads"});
 
 var widgets = [
+    {"_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "1"},
+    {"_id": "1230", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "2"},
+    {"_id": "12300", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "3"},
+    {"_id": "123000", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "4"},
     {"_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
     {"_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
     {
@@ -29,36 +33,37 @@ app.delete('/api/widget/:wgid', deleteWidget);
 // update file.
 app.post("/api/upload", upload.single('myFile'), uploadImage);
 // for re-arrange widgets.
-app.post('/page/:pid/widget', reArrangeWidgets);
+app.put('/page/:pid/widget', reArrangeWidgets);
 
 function reArrangeWidgets(req, res) {
     var pid = req.params.pid;
-    var initial = req.query.initial;
-    var final = req.query.final;
+    var initial = parseInt(req.query.initial);
+    var final = parseInt(req.query.final);
 
-    var min = Math.min(initial, final);
-    var max = Math.max(initial, final);
-    var specificWidgetIndex = -1;
+    if (initial === final ){
+        res.status(200).send("rearrange successfully");
+        return;
+    }
 
+    var count = -1;
     for (var w in widgets) {
         if (widgets[w].pageId === pid) {
-            specificWidgetIndex += 1;
-            if (specificWidgetIndex === min) {
-                min = w;
+            count ++;
+            if (count === initial) {
+                initial = w;
             }
-            if (specificWidgetIndex === max) {
-                max = w;
-                var buffer = widgets[min];
-                widgets[min] = widgets[max];
-                widgets[max] = buffer;
-                res.status(200).send("rearrange successfully");
-                return;
+            if (count === final) {
+                final = w;
             }
         }
     }
-    res.status(500).send("unexpected condition.");
-}
 
+    var widgetToPush = widgets[initial];
+    widgets.splice(initial, 1);
+    widgets.splice(final, 0, widgetToPush);
+    res.status(200).send("rearrange successfully");
+
+}
 
 function uploadImage(req, res) {
 

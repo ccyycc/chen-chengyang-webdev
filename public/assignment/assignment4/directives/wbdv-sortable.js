@@ -15,7 +15,7 @@
                         scope.final = ui.item.index();
                         scope.pageId = $routeParams.pid;
                         var url = "/page/" + scope.pageId + "/widget?initial=" + scope.initial + "&final=" + scope.final;
-                        return $http.post(url);
+                        return $http.put(url);
                     }
                 }
             );
