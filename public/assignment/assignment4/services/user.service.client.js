@@ -6,11 +6,11 @@
     function userServiceFunction($http) {
 
 
-        this.createWebsite = createUser;
-        this.findPageById = findUserById;
+        this.createUser = createUser;
+        this.findUserById = findUserById;
         this.findUserByUsername = findUserByUsername;
         this.findUserByCredentials = findUserByCredentials;
-        this.updatePage = updateUser;
+        this.updateUser = updateUser;
         this.deleteUser = deleteUser;
 
 

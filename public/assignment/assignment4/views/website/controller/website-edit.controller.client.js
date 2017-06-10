@@ -7,8 +7,8 @@
         var model = this;
 
         //event handler
-        model.deletePage = deleteWebsite;
-        model.updatePage = updateWebsite;
+        model.deleteWebsite = deleteWebsite;
+        model.updateWebsite = updateWebsite;
 
         init();
 
@@ -24,7 +24,7 @@
                         model.websites = undefined;
                     }
                 );
-            websiteService.findPageById(model.websiteId)
+            websiteService.findWebsiteById(model.websiteId)
                 .then(
                     function (website) {
                         model.website = website;
@@ -49,12 +49,12 @@
         }
 
         function updateWebsite() {
-            websiteService.updatePage(model.websiteId, model.website)
+            websiteService.updateWebsite(model.websiteId, model.website)
                 .then(navToWebsite, error);
         }
 
         function deleteWebsite() {
-            websiteService.deletePage(model.websiteId)
+            websiteService.deleteWebsite(model.websiteId)
                 .then(navToWebsite, error);
         }
 

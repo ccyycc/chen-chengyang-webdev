@@ -11,7 +11,7 @@
 
         function init() {
             model.userId = $routeParams['uid'];
-            model.user = userService.findPageById(model.userId);
+            model.user = userService.findUserById(model.userId);
             //header
             model.header = "Profile";
             model.back = "#!/login";
@@ -20,9 +20,9 @@
         }
 
         function updateProfile() {
-            userService.updatePage(model.userId,model.user);
+            userService.updateUser(model.userId,model.user);
             model.message="profile updated";
-            console.log(userService.findPageById(model.userId));
+            console.log(userService.findUserById(model.userId));
         }
 
 

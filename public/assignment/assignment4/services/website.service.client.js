@@ -6,9 +6,9 @@
     function websiteServiceFunction($http) {
         this.createWebsite = createWebsite;
         this.findWebsitesByUser = findWebsitesByUser;
-        this.findPageById = findWebsiteById;
-        this.updatePage = updateWebsite;
-        this.deletePage = deleteWebsite;
+        this.findWebsiteById = findWebsiteById;
+        this.updateWebsite = updateWebsite;
+        this.deleteWebsite = deleteWebsite;
 
         function createWebsite(userId, website) {
             var url = "/api/user/" + userId + "/website";

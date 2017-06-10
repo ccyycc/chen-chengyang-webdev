@@ -9,7 +9,7 @@
             {"_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
             {"_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"}
         ];
-        this.createWebsite = createPage;
+        this.createPage = createPage;
         this.findPageByWebsiteId = findPageByWebsiteId;
         this.findPageById = findPageById;
         this.updatePage = updatePage;
