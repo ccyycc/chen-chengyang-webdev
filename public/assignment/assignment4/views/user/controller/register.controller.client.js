@@ -33,7 +33,7 @@
                             username: model.username,
                             password: model.password
                         };
-                        userService.createUser(user)
+                        userService.createWebsite(user)
                             .then(function (user) {
                                 $location.url('/user/' + user._id);
                             });

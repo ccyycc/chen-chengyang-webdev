@@ -11,11 +11,11 @@
             {_id: "345", username: "charly", password: "charly", firstName: "Charly", lastName: "Garcia"},
             {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose", lastName: "Annunzi"}
         ];
-        this.createUser = createUser;
-        this.findUserById = findUserById;
+        this.createWebsite = createUser;
+        this.findPageById = findUserById;
         this.findUserByUsername = findUserByUsername;
         this.findUserByCredentials = findUserByCredentials;
-        this.updateUser = updateUser;
+        this.updatePage = updateUser;
         this.deleteUser = deleteUser;
 
 

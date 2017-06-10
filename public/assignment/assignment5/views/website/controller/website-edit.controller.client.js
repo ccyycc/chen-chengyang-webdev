@@ -3,13 +3,12 @@
         .module('WebAppMaker')
         .controller('websiteEditController', websiteEditController);
 
-    function websiteEditController($location, $routeParams,
-                                   websiteService, userService) {
+    function websiteEditController($location, $routeParams, websiteService) {
         var model = this;
 
         //event handler
-        model.deleteWebsite = deleteWebsite;
-        model.updateWebsite = updateWebsite;
+        model.deletePage = deleteWebsite;
+        model.updatePage = updateWebsite;
 
         init();
 
@@ -25,13 +24,14 @@
                         model.websites = undefined;
                     }
                 );
-            websiteService.findWebsiteById(model.websiteId)
+            websiteService.findPageById(model.websiteId)
                 .then(
                     function (website) {
                         model.website = website;
                     },
                     function () {
-                        alert("website is not exited");
+                        alert("website is not exited")
+                        navToWebsite();
                     }
                 );
 
@@ -49,18 +49,26 @@
         }
 
         function updateWebsite() {
-            websiteService.updateWebsite(model.websiteId, model.website)
-                .then(navToWebsite);
+            websiteService.updatePage(model.websiteId, model.website)
+                .then(navToWebsite, error);
         }
 
         function deleteWebsite() {
-            websiteService.deleteWebsite(model.websiteId)
-                .then(navToWebsite)
-
+            websiteService.deletePage(model.websiteId)
+                .then(navToWebsite, error);
         }
 
         function navToWebsite() {
             $location.url('/user/' + model.userId + "/website");
+        }
+
+        function navToPage() {
+            $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
+        }
+
+
+        function error() {
+            alert("error, please try again");
         }
     }
 })();

@@ -3,10 +3,9 @@
         .module('WebAppMaker')
         .controller('widgetNewController', widgetNewController);
 
-    function widgetNewController($location, $routeParams, widgetService, $sce) {
+    function widgetNewController($location, $routeParams, $sce) {
         var model = this;
 
-        model.getSize = getSize;
         model.trust = trust;
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.widgetUrl = widgetUrl;
@@ -20,15 +19,12 @@
             model.pageId = $routeParams['pid'];
             model.widgetId = $routeParams['wgid'];
 
-            model.widgets = widgetService.findWidgetsByPageId(model.pageId);
-
             //header
             model.header = "Choose Widget";
             model.back = "#!/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget";
 
             model.topRightOperationIcon = '';
-            model.topRightOperation = function () {
-            };
+            model.topRightOperation = function () {};
         }
 
         function createWidget(type) {
@@ -37,8 +33,7 @@
         }
 
         function widgetUrl(widget) {
-            var url = 'views/widget/templates/' + widget.widgetType.toLowerCase() + '/widget-' + widget.widgetType.toLowerCase() + '.view.client.html';
-            return url;
+            return 'views/widget/templates/' + widget.widgetType.toLowerCase() + '/widget-' + widget.widgetType.toLowerCase() + '.view.client.html';
         }
 
         function getYouTubeEmbedUrl(linkUrl) {
@@ -48,9 +43,6 @@
             return $sce.trustAsResourceUrl(embedUrl);
         }
 
-        function getSize(widget) {
-            return {'width': '50%'}
-        }
 
         function trust(html) {
             // scrubbing the html

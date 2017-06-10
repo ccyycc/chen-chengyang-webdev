@@ -21,7 +21,7 @@
         }
 
         function updateProfile() {
-            userService.updateUser(model.userId, model.user)
+            userService.updatePage(model.userId, model.user)
                 .then(function () {
                     sendMessage("profile updated");
                 }, function () {
@@ -38,7 +38,7 @@
         }
 
         function findUserById(userId) {
-            userService.findUserById(userId)
+            userService.findPageById(userId)
                 .then(userRender, errorRender)
         }
 

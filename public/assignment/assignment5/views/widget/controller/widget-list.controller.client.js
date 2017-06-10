@@ -3,8 +3,7 @@
         .module('WebAppMaker')
         .controller('widgetListController', widgetListController);
 
-    function widgetListController($location, $routeParams,
-                                  widgetService, $sce) {
+    function widgetListController($location, $routeParams, widgetService, $sce) {
         var model = this;
 
 
@@ -25,15 +24,16 @@
                     function (widgets) {
                         model.widgets = widgets;
                     },
-                    function(){
+                    function () {
                         alert("cound not find widgets with page id");
+                        navToPage();
                     }
                 );
 
             //header
             model.header = "Widget List";
             model.back = "#!/user/" + model.userId + "/website/" + model.websiteId + "/page";
-            model.topRightOperationIcon = 'glyphicon glyphicon-plus'
+            model.topRightOperationIcon = 'glyphicon glyphicon-plus';
             model.topRightOperation = newWidget;
         }
 
@@ -64,6 +64,14 @@
 
         function newWidget() {
             $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget/new");
+        }
+
+        function navToPage() {
+            $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
+        }
+
+        function navToWebsite() {
+            $location.url('/user/' + model.userId + "/website/");
         }
 
     }

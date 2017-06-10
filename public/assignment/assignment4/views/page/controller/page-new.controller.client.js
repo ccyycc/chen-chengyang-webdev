@@ -42,7 +42,7 @@
 
         function createNewPage() {
             model.page.wid = model.websiteId;
-            pageService.createPage(model.websiteId, model.page)
+            pageService.createWebsite(model.websiteId, model.page)
                 .then(navToPage,function(){
                     alert("fail to create a page, please try again.")
                 });

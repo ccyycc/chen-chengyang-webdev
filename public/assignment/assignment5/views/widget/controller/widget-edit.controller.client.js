@@ -4,7 +4,6 @@
         .controller('widgetEditController', widgetEditController);
 
     function widgetEditController($location, $routeParams, widgetService, $sce) {
-
         var model = this;
 
         model.updateWidget = updateWidget;
@@ -13,11 +12,12 @@
 
         model.trust = trust;
         model.widgetUrl = widgetUrl;
+
         init();
 
         function init() {
-            model.widths = ["100%","75%","50%","25%","10%"];
-            model.sizes = [6,5,4,3,2,1];
+            model.widths = ["100%", "75%", "50%", "25%", "10%"];
+            model.sizes = [6, 5, 4, 3, 2, 1];
 
             model.userId = $routeParams['uid'];
             model.websiteId = $routeParams['wid'];
@@ -29,82 +29,80 @@
 
             if (model.mode === "new") {
                 model.header = "New ";
-                // console.log('backtonew, the buffer widget is ');
-                // console.log(bufferWidget);
-                if (Object.keys(bufferWidget).length == 0){
-                    // console.log('bufferwidget == {}');
+                if (Object.keys(bufferWidget).length === 0) {
                     model.widget = {
-                    "widgetType": $routeParams.wgid,
+                        "widgetType": $routeParams.wgid,
                         "size": 1
                     };
-                }else{
-                    // console.log('bufferwidget != {}');
-
+                } else {
                     model.widget = bufferWidget.widget;
                     widgetService.deleteTmpWidget();
                 }
 
                 model.header = "New " + getHeader();
-                model.preSelectedSize=true;
+                model.preSelectedSize = true;
             } else {
                 model.header = "Edit ";
 
-                if (Object.keys(bufferWidget).length == 0){
+                if (Object.keys(bufferWidget).length === 0) {
                     widgetService.findWidgetById(model.widgetId)
                         .then(
                             function (widget) {
                                 model.widget = widget;
                                 model.header = "Edit " + getHeader();
                             },
-                            function () {
-                                alert("cannot find widget by id");
+                            function(){
+                                alert("cannot find widget by id")
                             }
+                            // sendAlert("cannot find widget by id")
                         );
-
-                }else {
+                } else {
                     model.widget = bufferWidget.widget;
                     widgetService.deleteTmpWidget();
 
                 }
-                model.preSelectedSize=false;
+                model.preSelectedSize = false;
             }
 
 
             model.back = "#!/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget";
             model.topRightOperationIcon = 'glyphicon glyphicon-ok';
             model.topRightOperation = model.updateWidget;
-            // model.check = check;
 
         }
 
-        function searchOnFlickr(){
-            // console.log('searchOnFlickr');
-            // console.log(model.widget);
-            widgetService.saveTmpWidget($location.url(),model.widget);
-            $location.path('/widget/'+model.widget._id+'/search');
+        function searchOnFlickr() {
+            widgetService.saveTmpWidget($location.url(), model.widget);
+            $location.path('/widget/' + model.widget._id + '/search');
         }
-
-        // function check () {
-            // console.log(angular.element(document.getElementById('123')));
-        // }
-
 
         function updateWidget() {
 
             if (model.widget._id == null) {
                 widgetService.createWidget(model.pageId, model.widget)
                     .then(
-                        goToWidgetList,
                         function () {
-                            alert("create widget fail");
+                            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+                        },
+                        function () {
+                            alert("create widget fail")
                         }
+                        //             goToWidgetList,
+                        //             sendAlert("create widget fail !!!!!!")
                     );
+
             }
             else {
                 widgetService.updateWidget(model.widget._id, model.widget)
                     .then(
-                        goToWidgetList
-                        // alert("update Widget fail")
+                        function () {
+                            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+                        },
+                        function () {
+                            alert("update widget fail")
+                        }
+                        // goToWidgetList,
+                        // sendAlert("update Widget fail")
                     );
             }
         }
@@ -114,10 +112,14 @@
             if (model.widget._id != null) {
                 widgetService.deleteWidget(model.widget._id)
                     .then(
-                        goToWidgetList,
                         function () {
-                            alert("delete Widget fail")
+                            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+                        },
+                        function () {
+                            alert("delete widget fail")
                         }
+                        // goToWidgetList,
+                        // sendAlert("delete Widget fail"));
                     );
             }
         }
@@ -142,9 +144,6 @@
             }
         }
 
-        function goToWidgetList(data) {
-            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
-        }
 
 
         function widgetUrl(widget) {
@@ -156,6 +155,16 @@
         function trust(html) {
             // scrubbing the html
             return $sce.trustAsHtml(html);
+        }
+
+
+        function goToWidgetList(data) {
+            console.log("success");
+            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+        }
+
+        function sendAlert(message) {
+            alert(message)
         }
 
     }

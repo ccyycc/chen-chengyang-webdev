@@ -31,7 +31,7 @@
 
         function createNewPage() {
             model.page.websiteId = model.websiteId;
-            pageService.createPage(model.websiteId, model.page);
+            pageService.createWebsite(model.websiteId, model.page);
             $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
         }
     }

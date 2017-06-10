@@ -1,22 +1,20 @@
 <!--header-->
 <div ng-include="'./views/common/header/one-col-header.view.client.html'"></div>
 
-<div ng-app="Draggable">
 
-    <!--body-->
-    <div wd-draggable class="container-fluid">
+<!--body-->
+<div wd-draggable class="container-fluid">
 
 
-        <div ng-repeat="widget in model.widgets" class="wd-widget">
-            <div class="wd-widget-toolbar">
-                <a ng-click="model.editWidget(widget)">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-                <span class="glyphicon glyphicon-align-justify"></span>
-            </div>
-
-            <div ng-include="model.widgetUrl(widget)"></div>
+    <div ng-repeat="widget in model.widgets" class="wd-widget">
+        <div class="wd-widget-toolbar">
+            <a ng-click="model.editWidget(widget)">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
         </div>
+
+        <div ng-include="model.widgetUrl(widget)"></div>
     </div>
 </div>
 

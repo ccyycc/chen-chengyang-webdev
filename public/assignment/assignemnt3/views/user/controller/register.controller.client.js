@@ -31,7 +31,7 @@
                     username: model.username,
                     password: model.password
                 };
-                user = userService.createUser(user);
+                user = userService.createWebsite(user);
                 $location.url('/user/' + user._id);
 
             }

@@ -8,17 +8,17 @@
         var model = this;
 
         //event handler
-        model.deleteWebsite = deleteWebsite;
-        model.updateWebsite = updateWebsite;
+        model.deletePage = deleteWebsite;
+        model.updatePage = updateWebsite;
 
         init();
 
         function init() {
             model.userId = $routeParams['uid'];
             model.websiteId = $routeParams['wid'];
-            model.user = userService.findUserById(model.userId)
+            model.user = userService.findPageById(model.userId)
             model.websites = websiteService.findWebsitesByUser(model.userId);
-            model.website = websiteService.findWebsiteById(model.websiteId);
+            model.website = websiteService.findPageById(model.websiteId);
 
             //header
             //left panel
@@ -34,12 +34,12 @@
         }
 
         function updateWebsite() {
-            websiteService.updateWebsite(model.websiteId, model.website);
+            websiteService.updatePage(model.websiteId, model.website);
             $location.url('/user/' + model.userId + "/website");
         }
 
         function deleteWebsite() {
-            websiteService.deleteWebsite(model.websiteId);
+            websiteService.deletePage(model.websiteId);
             console.log("finish delete");
             $location.url('/user/' + model.userId + "/website");
         }

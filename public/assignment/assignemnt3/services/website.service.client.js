@@ -6,9 +6,9 @@
     function websiteServiceFunction() {
         this.createWebsite = createWebsite;
         this.findWebsitesByUser = findWebsitesByUser;
-        this.findWebsiteById = findWebsiteById;
-        this.updateWebsite = updateWebsite;
-        this.deleteWebsite = deleteWebsite;
+        this.findPageById = findWebsiteById;
+        this.updatePage = updateWebsite;
+        this.deletePage = deleteWebsite;
         var websites = [
             {"_id": "123", "name": "Facebook", "developerId": "456", "description": "Lorem"},
             {"_id": "234", "name": "Tweeter", "developerId": "456", "description": "Lorem"},

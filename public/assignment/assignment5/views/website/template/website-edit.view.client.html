@@ -30,15 +30,15 @@
                         <li ng-repeat="website in model.websites" class="list-group-item">
                             <div class="row ">
                                 <div class="col-lg-4 col-md-7 col-xs-10 ">
-                                    <a href="#!/user/{{website.developerId}}/website/{{website._id}}/page">
+                                    <a href="#!/user/{{model.userId}}/website/{{website._id}}/page">
                                         {{website.name}}
                                     </a>
                                 </div>
                                 <div class="col-lg-3 visible-lg">
-                                    {{website.createdTime | date}}
+                                    {{website.dateCreated | date}}
                                 </div>
                                 <div class="col-md-3 hidden-sm hidden-xs">
-                                    {{website.accessedTime | date}}
+                                    {{website.dateAccessed | date}}
                                 </div>
                                 <div class="col-xs-2">
                                     <a href="#!/user/{{model.userId}}/website/{{website._id}}">
@@ -69,7 +69,7 @@
                           ng-model="model.website.description"
                           class="form-control"></textarea>
                 <!--delete button -->
-                <a ng-click="model.deleteWebsite()"
+                <a ng-click="model.deletePage()"
                    class="btn btn-block btn-danger">Delete</a>
             </div>
         </div>

@@ -5,7 +5,7 @@
 
     function pageServiceFunction($http) {
 
-        this.createPage = createPage;
+        this.createWebsite = createPage;
         this.findPageByWebsiteId = findPageByWebsiteId;
         this.findPageById = findPageById;
         this.updatePage = updatePage;

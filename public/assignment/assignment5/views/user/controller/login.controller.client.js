@@ -21,7 +21,6 @@
         }
 
 
-
         function login() {
             if (model.username == null) {
                 sendMessage("username is empty");
@@ -43,7 +42,6 @@
 
         function errorRender() {
             sendMessage("User is not found or password is incorrect.");
-
         }
 
         function register() {
@@ -52,8 +50,9 @@
 
         function sendMessage(message) {
             model.message = message;
-            timeOut(1500);
+            timeOut(5000);
         }
+
         function timeOut(t) {
             $timeout.cancel();
             $timeout(

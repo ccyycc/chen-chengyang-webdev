@@ -14,7 +14,7 @@
         function init() {
             //initiating instance
             model.userId = $routeParams['uid'];
-            model.user = userService.findUserById(model.userId)
+            model.user = userService.findPageById(model.userId)
             model.websites = websiteService.findWebsitesByUser(model.userId);
 
             //header

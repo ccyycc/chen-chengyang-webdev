@@ -23,31 +23,23 @@
             if (!isValid(model.username, model.password, model.reEnterPassword)) {
                 return;
             }
-            // var user = userService.findUserByUsername(model.username);
             var user = userService.findUserByUsername(model.username)
-                .then(function () {
+                .then(
+                    function (user) {
                         sendMessage(model.username + " exist, please try different user name");
                     },
-                    function () {
+                    function (user) {
                         user = {
                             username: model.username,
                             password: model.password
                         };
-                        userService.createUser(user)
+                        userService.createWebsite(user)
                             .then(function (user) {
                                 $location.url('/user/' + user._id);
                             });
                     });
 
         }
-
-        // function createUser(user){
-        //     user = userService.createUser(user)
-        //         .then(function (user) {
-        //             return user;
-        //         });
-        //     $location.url('/user/' + user._id);
-        // }
 
         function isValid(username, password, reptPassword) {
             if (username == null || username == "") {
@@ -62,7 +54,6 @@
                 sendMessage("please re-enter password");
                 return false;
             }
-
             if (password !== reptPassword) {
                 sendMessage("password is not equal.");
                 return false;
