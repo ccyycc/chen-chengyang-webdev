@@ -4,7 +4,7 @@ var pageModel = mongoose.model('PageModel', pageSchema);
 
 var websiteModel = require('../website/website.model.server');
 
-pageModel.createWebsite = createPage;
+pageModel.createPage = createPage;
 pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
 pageModel.findPageById = findPageById;
 pageModel.updatePage = updatePage;
@@ -16,6 +16,7 @@ pageModel.reArrangeWidgets = reArrangeWidgets;
 
 
 module.exports = pageModel;
+
 function addWidget(pageId, widgetId) {
     return pageModel
         .findById(pageId)

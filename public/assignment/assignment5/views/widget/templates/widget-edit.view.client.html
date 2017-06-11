@@ -1,7 +1,7 @@
 <!--header-->
 <div ng-include="'./views/common/header/one-col-header.view.client.html'"></div>
 <!--body-->
-<div ng-switch="model.widget.type">
+<div ng-switch="model.widget.type" class="container-fluid">
     <div ng-switch-when="HEADING">
         <div ng-include="'./views/widget/templates/heading/widget-heading-edit.view.client.html'"></div>
     </div>

@@ -13,7 +13,7 @@ function createPage(req, res) {
     var page = req.body;
     var websiteId = req.params.wid;
     pageModel
-        .createWebsite(websiteId, page)
+        .createPage(websiteId, page)
         .then(function (page) {
                 res.status(200).json(page);
             },

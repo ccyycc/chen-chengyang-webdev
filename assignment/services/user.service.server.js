@@ -18,7 +18,7 @@ app.delete('/api/user/:uid', deleteUser);
  */
 function createUser(req, res) {
     userModel
-        .createWebsite(req.body)
+        .createUser(req.body)
         .then(function (user) {
             res.json(user);
         }, function (err) {
@@ -69,7 +69,7 @@ function findUserById(req, res) {
     var userId = req.params.uid;
 
     userModel
-        .findPageById(userId)
+        .findUserById(userId)
         .then(
             function (user) {
                 if (user) {
@@ -89,7 +89,7 @@ function updateUser(req, res) {
     var uid = req.params.uid + "";
 
     userModel
-        .updatePage(uid, user)
+        .updateUser(uid, user)
         .then(function (status) {
             res.send(status);
         });

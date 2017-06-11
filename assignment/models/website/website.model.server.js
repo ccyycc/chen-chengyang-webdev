@@ -16,7 +16,7 @@ websiteModel.deletePage = deletePage;
 module.exports = websiteModel;
 
 function addPage(websiteId, pageId) {
-   return websiteModel
+    return websiteModel
         .findById(websiteId)
         .then(
             function (website) {
@@ -41,7 +41,7 @@ function createWebsiteForUser(userId, website) {
     return websiteModel
         .create(website)
         .then(function (website) {
-            return userModel.addWebsite(userId, website._id)
+            return userModel.addWebsite(userId, website._id);
         })
         .then(
             function () {
@@ -73,11 +73,11 @@ function deleteWebsite(websiteId) {
         .findOne({_id: websiteId})
         .then(
             function (website) {
-                websiteModel
+                return websiteModel
                     .remove({_id: websiteId})
                     .then(
                         function (status) {
-                            return userModel.deletePage(website._user, websiteId)
+                            return userModel.deleteWebsite(website._user, websiteId)
                         })
             })
 
