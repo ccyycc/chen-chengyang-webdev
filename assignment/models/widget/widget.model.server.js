@@ -10,7 +10,7 @@ widgetModel.findWidgetById = findWidgetById;
 widgetModel.updateWidget = updateWidget;
 widgetModel.deleteWidget = deleteWidget;
 
-widgetModel.deleteWidgetsForPage = deleteWidgetsForPage;
+// widgetModel.deleteWidgetsForPage = deleteWidgetsForPage;
 
 module.exports = widgetModel;
 
