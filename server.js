@@ -31,11 +31,11 @@ app.use(app.express.static(__dirname + '/public'));
 // });
 
 
-// database test module.
-require("./test/app.js");
+// // database test module.
+// require("./test/app.js");
 
-// // server side module for assignment 4
-// require('./assignment/app.js');
+// server side module for assignment 4
+require('./assignment/app.js');
 
 var port = process.env.PORT || 3000;
 
