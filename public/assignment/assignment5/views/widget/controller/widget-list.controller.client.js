@@ -44,7 +44,8 @@
 
 
         function widgetUrl(widget) {
-            var url = 'views/widget/templates/' + widget.widgetType.toLowerCase() + '/widget-' + widget.widgetType.toLowerCase() + '.view.client.html';
+            console.log(widget);
+            var url = 'views/widget/templates/' + widget.type.toLowerCase() + '/widget-' + widget.type.toLowerCase() + '.view.client.html';
             return url;
         }
 

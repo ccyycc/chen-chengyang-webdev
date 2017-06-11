@@ -5,16 +5,18 @@ var widgetModel = mongoose.model('WidgetModel', widgetSchema);
 var pageModel = require('../page/page.model.server');
 
 widgetModel.createWidget = createWidget;
-widgetModel.findAllPagesForWebsite = findAllPagesForWebsite;
-widgetModel.findPageById = findPageById;
-widgetModel.updatePage = updatePage;
-widgetModel.deletePage = deletePage;
+widgetModel.findAllWidgetsForPage = findAllWidgetsForPage;
+widgetModel.findWidgetById = findWidgetById;
+widgetModel.updateWidget = updateWidget;
+widgetModel.deleteWidget = deleteWidget;
+
+widgetModel.deleteWidgetsForPage = deleteWidgetsForPage;
 
 module.exports = widgetModel;
 
 
 function createWidget(pageId, widget) {
-    widget._website = pageId;
+    widget._page = pageId;
     return widgetModel
         .create(widget)
         .then(function (widget) {
@@ -28,35 +30,44 @@ function createWidget(pageId, widget) {
 }
 
 
-function findAllPagesForWebsite(websiteId) {
+function findAllWidgetsForPage(pageId) {
+    return pageModel
+        .findPageById(pageId)
+        .populate('widgets')
+        .exec()
+        .then(function(page){
+            return page.widgets;
+        })
+
+    // return widgetModel
+    //     .find({_page: pageId})
+    //     .exec();
+}
+
+function findWidgetById(widgetId) {
+    return widgetModel.findById(widgetId);
+}
+
+
+function updateWidget(widgetId, widget) {
+    widget.dateAccessed = Date.now();
+    return widgetModel.update({_id: widgetId}, {$set: widget});
+}
+
+function deleteWidget(widgetId) {
     return widgetModel
-        .find({_website: websiteId})
-        .exec();
-}
-
-function findPageById(pageId) {
-    return widgetModel.findById(pageId);
-}
-
-
-function updatePage(pageId, page) {
-    page.dateAccessed = Date.now();
-    return widgetModel.update({_id: pageId}, {$set: page});
-}
-
-function deletePage(pageId) {
-    return widgetModel
-        .findById(pageId)
+        .findById(widgetId)
         .then(
-            function (page) {
-                widgetModel
-                    .remove({_id: pageId})
+            function (widget) {
+                return widgetModel
+                    .remove({_id: widgetId})
                     .then(
                         function (status) {
-                            return pageModel.deletePage(page._website, pageId)
+                            return pageModel.deleteWidget(widget._page, widgetId)
                         })
             })
 
 
 }
+
 

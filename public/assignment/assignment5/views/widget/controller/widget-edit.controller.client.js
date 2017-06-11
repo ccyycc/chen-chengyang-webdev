@@ -31,7 +31,7 @@
                 model.header = "New ";
                 if (Object.keys(bufferWidget).length === 0) {
                     model.widget = {
-                        "widgetType": $routeParams.wgid,
+                        "type": $routeParams.wgid,
                         "size": 1
                     };
                 } else {
@@ -51,7 +51,7 @@
                                 model.widget = widget;
                                 model.header = "Edit " + getHeader();
                             },
-                            function(){
+                            function () {
                                 alert("cannot find widget by id")
                             }
                             // sendAlert("cannot find widget by id")
@@ -126,7 +126,7 @@
 
         function getHeader() {
             //header
-            switch (model.widget.widgetType) {
+            switch (model.widget.type) {
                 case "HEADING":
                     return "Heading Widget";
                     break;
@@ -139,15 +139,17 @@
                 case "HTML":
                     return "HTML Widget";
                     break;
+                case "TEXT":
+                    return "TEXT";
+                    break;
                 default:
                     break;
             }
         }
 
 
-
         function widgetUrl(widget) {
-            var url = 'views/widget/templates/' + widget.widgetType.toLowerCase() + '/widget-' + widget.widgetType.toLowerCase() + '.view.client.html';
+            var url = 'views/widget/templates/' + widget.type.toLowerCase() + '/widget-' + widget.type.toLowerCase() + '.view.client.html';
             return url;
         }
 

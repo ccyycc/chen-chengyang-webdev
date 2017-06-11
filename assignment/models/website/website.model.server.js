@@ -16,7 +16,7 @@ websiteModel.deletePage = deletePage;
 module.exports = websiteModel;
 
 function addPage(websiteId, pageId) {
-    websiteModel
+   return websiteModel
         .findById(websiteId)
         .then(
             function (website) {
@@ -26,7 +26,7 @@ function addPage(websiteId, pageId) {
 }
 
 function deletePage(websiteId, pageId) {
-    websiteModel
+    return websiteModel
         .findById(websiteId)
         .then(
             function (website) {

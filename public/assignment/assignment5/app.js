@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module('WebAppMaker', ['ngRoute','WDSortable'])
+        .module('WebAppMaker', ['ngRoute','WDSortable',"textAngular"])
 })();

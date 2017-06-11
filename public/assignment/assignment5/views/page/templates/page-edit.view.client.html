@@ -35,18 +35,18 @@
                         <li ng-repeat="page in model.pages" class="list-group-item">
                             <div class="row ">
                                 <div class="col-lg-4 col-md-7 col-xs-10 ">
-                                    <a href="#!/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}/widget">
+                                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
                                         {{page.name}}
                                     </a>
                                 </div>
                                 <div class="col-lg-3 visible-lg">
-                                    {{page.createdTime | date}}
+                                    {{page.dateCreated | date}}
                                 </div>
                                 <div class="col-md-3 hidden-sm hidden-xs">
-                                    {{page.accessedTime | date}}
+                                    {{page.dateAccessed | date}}
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#!/user/{{model.userId}}/website/{{page.websiteId}}/page/{{page._id}}">
+                                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
                                         <span class="glyphicon glyphicon-cog pull-right"></span>
                                     </a>
                                 </div>

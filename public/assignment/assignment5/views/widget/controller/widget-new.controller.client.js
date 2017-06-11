@@ -28,12 +28,12 @@
         }
 
         function createWidget(type) {
-            model.widget = {"widgetType": type};
+            model.widget = {"type": type};
             $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget/" + type + "#new");
         }
 
         function widgetUrl(widget) {
-            return 'views/widget/templates/' + widget.widgetType.toLowerCase() + '/widget-' + widget.widgetType.toLowerCase() + '.view.client.html';
+            return 'views/widget/templates/' + widget.type.toLowerCase() + '/widget-' + widget.type.toLowerCase() + '.view.client.html';
         }
 
         function getYouTubeEmbedUrl(linkUrl) {
