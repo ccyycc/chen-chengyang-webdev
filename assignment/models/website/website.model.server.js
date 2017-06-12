@@ -13,7 +13,27 @@ websiteModel.deleteWebsite = deleteWebsite;
 websiteModel.addPage = addPage;
 websiteModel.deletePage = deletePage;
 
+websiteModel.deleteWebsiteForUser = deleteWebsiteForUser;
+
+
 module.exports = websiteModel;
+
+function deleteWebsiteForUser(userId) {
+    var pageModel = require("../page/page.model.server");
+    return websiteModel
+        .find({_user:userId})
+        .then(function(websites){
+            websites.forEach(
+                function(website){
+                    return pageModel.deletePagesForWebsite(website._id)
+                }
+            )
+        })
+        .then(function () {
+            return websiteModel
+                .deleteMany({_user: userId})
+        });
+}
 
 function addPage(websiteId, pageId) {
     return websiteModel
@@ -69,6 +89,8 @@ function updateWebsite(websiteId, website) {
 }
 
 function deleteWebsite(websiteId) {
+    var pageModel = require("../page/page.model.server");
+    pageModel.deletePagesForWebsite(websiteId);
     return websiteModel
         .findOne({_id: websiteId})
         .then(

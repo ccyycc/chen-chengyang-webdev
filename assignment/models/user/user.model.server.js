@@ -38,6 +38,8 @@ function updateUser(userId, newUser) {
     return userModel.update({_id: userId}, {$set: newUser});
 }
 function deleteUser(userId) {
+    var websiteModel = require('../website/website.model.server');
+    websiteModel.deleteWebsiteForUser(userId);
     return userModel.remove({_id: userId});
 }
 

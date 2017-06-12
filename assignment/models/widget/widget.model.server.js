@@ -10,11 +10,19 @@ widgetModel.findWidgetById = findWidgetById;
 widgetModel.updateWidget = updateWidget;
 widgetModel.deleteWidget = deleteWidget;
 
-// widgetModel.deleteWidgetsForPage = deleteWidgetsForPage;
+widgetModel.deleteWidgetsForPage = deleteWidgetsForPage;
 
 module.exports = widgetModel;
 
 
+function deleteWidgetsForPage(pageId){
+    return pageModel
+        .find({_page:pageId})
+        .then(function () {
+            return widgetModel.deleteMany({_page:pageId});
+        });
+
+}
 function createWidget(pageId, widget) {
     widget._page = pageId;
     return widgetModel
@@ -35,7 +43,7 @@ function findAllWidgetsForPage(pageId) {
         .findPageById(pageId)
         .populate('widgets')
         .exec()
-        .then(function(page){
+        .then(function (page) {
             return page.widgets;
         })
 
