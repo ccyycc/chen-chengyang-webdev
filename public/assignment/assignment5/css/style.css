@@ -82,6 +82,7 @@ body {
 }
 
 .wd-widget {
+    min-height: 30px;
     margin-bottom: 10px;
 }
 
@@ -89,7 +90,7 @@ body {
     width: 100%;
 }
 
-.wd-widget > .wd-widget-toolbar {
+.wd-widget .wd-widget-toolbar {
     position: absolute;
     right: 15px;
     background: white;

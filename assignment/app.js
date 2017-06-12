@@ -9,14 +9,8 @@ if(process.env.MLAB_USERNAME) {
         process.env.MLAB_PASSWORD + "@ds137281.mlab.com:37281/heroku_2m54jxsb";
 }
 
-
 mongoose.connect(connectionString);
 mongoose.Promise = require('q').Promise;
-
-
-
-
-
 
 require('./services/user.service.server');
 require('./services/website.service.server');
