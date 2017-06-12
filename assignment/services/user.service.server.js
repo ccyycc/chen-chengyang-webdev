@@ -11,11 +11,6 @@ app.put('/api/user/:uid', updateUser);
 app.delete('/api/user/:uid', deleteUser);
 
 
-/**
- * create a user.
- * @param req user object.
- * @param res user object.
- */
 function createUser(req, res) {
     userModel
         .createUser(req.body)
@@ -24,9 +19,6 @@ function createUser(req, res) {
         }, function (err) {
             res.send(err);
         })
-    // var user = req.body;
-    // user._id= (new Date()).getTime()+"";
-    // users.push(user);
 }
 
 function findUserByUserName(req, res) {

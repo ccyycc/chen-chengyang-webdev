@@ -8,8 +8,9 @@ app.put('/api/website/:wid', updateWebsite);
 app.delete('/api/website/:wid', deleteWebsite);
 
 function createWebsite(req, res) {
-    var website = req.body;
     var userId = req.params.uid;
+    var website = req.body;
+
     websiteModel
         .createWebsiteForUser(userId, website)
         .then(
@@ -39,6 +40,7 @@ function findAllWebsitesForUser(req, res) {
 
 function findWebsiteById(req, res) {
     var wid = req.params.wid + "";
+
     websiteModel
         .findWebsiteById(wid)
         .then(
@@ -53,6 +55,7 @@ function findWebsiteById(req, res) {
 function updateWebsite(req, res) {
     var wid = req.params.wid + "";
     var website = req.body;
+
     websiteModel
         .updateWebsite(wid, website)
         .then(
@@ -66,6 +69,7 @@ function updateWebsite(req, res) {
 }
 function deleteWebsite(req, res) {
     var wid = req.params.wid + "";
+
     websiteModel
         .deleteWebsite(wid)
         .then(
@@ -76,6 +80,5 @@ function deleteWebsite(req, res) {
                 res.sendStatus(500);
             }
         )
-
 }
 

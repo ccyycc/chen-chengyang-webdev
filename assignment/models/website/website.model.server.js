@@ -4,27 +4,29 @@ var websiteModel = mongoose.model('WebsiteModel', websiteSchema);
 
 var userModel = require('../user/user.model.server');
 
+//website CRUD
 websiteModel.createWebsiteForUser = createWebsiteForUser;
 websiteModel.findAllWebsitesForUser = findAllWebsitesForUser;
 websiteModel.findWebsiteById = findWebsiteById;
 websiteModel.updateWebsite = updateWebsite;
 websiteModel.deleteWebsite = deleteWebsite;
-
-websiteModel.addPage = addPage;
-websiteModel.deletePage = deletePage;
-
+//website delete call from user
 websiteModel.deleteWebsiteForUser = deleteWebsiteForUser;
 
+//website.pages CD
+websiteModel.addPage = addPage;
+websiteModel.deletePage = deletePage;
 
 module.exports = websiteModel;
 
 function deleteWebsiteForUser(userId) {
     var pageModel = require("../page/page.model.server");
+
     return websiteModel
-        .find({_user:userId})
-        .then(function(websites){
+        .find({_user: userId})
+        .then(function (websites) {
             websites.forEach(
-                function(website){
+                function (website) {
                     return pageModel.deletePagesForWebsite(website._id)
                 }
             )
@@ -46,6 +48,7 @@ function addPage(websiteId, pageId) {
 }
 
 function deletePage(websiteId, pageId) {
+
     return websiteModel
         .findById(websiteId)
         .then(
@@ -58,6 +61,7 @@ function deletePage(websiteId, pageId) {
 
 function createWebsiteForUser(userId, website) {
     website._user = userId;
+
     return websiteModel
         .create(website)
         .then(function (website) {
@@ -85,12 +89,15 @@ function findWebsiteById(websiteId) {
 
 function updateWebsite(websiteId, website) {
     website.dateAccessed = Date.now();
+
     return websiteModel.update({_id: websiteId}, {$set: website});
 }
 
 function deleteWebsite(websiteId) {
+    //delete page content in the website.
     var pageModel = require("../page/page.model.server");
     pageModel.deletePagesForWebsite(websiteId);
+    //delete website document
     return websiteModel
         .findOne({_id: websiteId})
         .then(
@@ -99,6 +106,7 @@ function deleteWebsite(websiteId) {
                     .remove({_id: websiteId})
                     .then(
                         function (status) {
+                            //delete reference in user document.
                             return userModel.deleteWebsite(website._user, websiteId)
                         })
             })

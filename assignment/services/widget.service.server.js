@@ -4,12 +4,11 @@ var app = require('../../express');
 var multer = require('multer'); // npm install multer --save
 var upload = multer({dest: __dirname + "/../../public/assignment/assignment5/uploads"});
 
-
+//requiring mongoose model.
 var widgetModel = require('../models/widget/widget.model.server');
 var pageModel = require('../models/page/page.model.server');
 
-
-
+//API
 app.post('/api/page/:pid/widget', createWidget);
 app.get('/api/page/:pid/widget', findAllWidgetForPage);
 app.get('/api/widget/:wgid', findWidgetById);
@@ -24,6 +23,7 @@ function reArrangeWidgets(req, res) {
     var pid = req.params.pid;
     var initial = parseInt(req.query.initial);
     var final = parseInt(req.query.final);
+
     return pageModel
         .reArrangeWidgets(pid,initial,final)
         .then(
@@ -34,7 +34,6 @@ function reArrangeWidgets(req, res) {
                 return res.sendStatus(500);
             }
         );
-
 }
 
 function uploadImage(req, res) {
@@ -64,9 +63,11 @@ function uploadImage(req, res) {
     widget.url = '/assignment/assignment5/uploads/' + filename;
 
     if (widgetId === "") {
+        //create new widget for empty widget
         widget.type = "IMAGE";
         widgetModel.createWidget(pageId,widget);
     } else {
+        //update current widgets
         widgetModel.updateWidget(widgetId, widget)
     }
 
@@ -78,8 +79,9 @@ function uploadImage(req, res) {
 
 
 function createWidget(req, res) {
-    var widget = req.body;
     var pageId = req.params.pid;
+    var widget = req.body;
+
     widgetModel
         .createWidget(pageId, widget)
         .then(
@@ -136,6 +138,7 @@ function updateWidget(req, res) {
 }
 function deleteWidget(req, res) {
     var widgetId = req.params.wgid + "";
+
     widgetModel
         .deleteWidget(widgetId)
         .then(
@@ -147,20 +150,3 @@ function deleteWidget(req, res) {
             });
 }
 
-
-// function (widget) {
-//     widget._id = (new Date()).getTime() + "";
-//     widget.createdTime = new Date();
-//     widget.accessedTime = new Date();
-//     widgets.push(widget);
-// }
-
-function localUpdateWidgetWithId(wgid, widget) {
-    widget.accessedTime = new Date();
-    for (var i in widgets) {
-        if (widgets[i]._id === wgid) {
-            Object.assign(widgets[i], widget);
-            return;
-        }
-    }
-}

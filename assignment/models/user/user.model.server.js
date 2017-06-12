@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var userSchema = require('./user.schema.server');
 var userModel = mongoose.model('UserModel', userSchema);
 
+//user CRUD
 userModel.createUser = createUser;
 userModel.findUserById = findUserById;
 userModel.findUserByUsername = findUserByUsername;
@@ -9,11 +10,11 @@ userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 
+//user.websites CD
 userModel.addWebsite = addWebsite;
 userModel.deleteWebsite = deleteWebsite;
 
 module.exports = userModel;
-
 
 
 function createUser(user) {
@@ -37,12 +38,12 @@ function updateUser(userId, newUser) {
     delete newUser.password;
     return userModel.update({_id: userId}, {$set: newUser});
 }
+
 function deleteUser(userId) {
     var websiteModel = require('../website/website.model.server');
     websiteModel.deleteWebsiteForUser(userId);
     return userModel.remove({_id: userId});
 }
-
 
 function addWebsite(userId, websiteId) {
     userModel

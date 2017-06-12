@@ -4,27 +4,30 @@ var pageModel = mongoose.model('PageModel', pageSchema);
 
 var websiteModel = require('../website/website.model.server');
 
+//page CRUD
 pageModel.createPage = createPage;
 pageModel.findAllPagesForWebsite = findAllPagesForWebsite;
 pageModel.findPageById = findPageById;
 pageModel.updatePage = updatePage;
 pageModel.deletePage = deletePage;
+//page delete call from website.
+pageModel.deletePagesForWebsite = deletePagesForWebsite;
 
+//page._widgets CUD
 pageModel.addWidget = addWidget;
 pageModel.deleteWidget = deleteWidget;
 pageModel.reArrangeWidgets = reArrangeWidgets;
-
-
-pageModel.deletePagesForWebsite = deletePagesForWebsite;
 
 module.exports = pageModel;
 
 
 function deletePagesForWebsite (websiteId){
     var widgetModel = require("../widget/widget.model.server");
+
     return pageModel
         .find({_website:websiteId})
         .then(function(pages){
+            //delete all widgets in each page.
             pages.forEach(
                 function(page){
                     return widgetModel.deleteWidgetsForPage(page._id)
@@ -32,6 +35,7 @@ function deletePagesForWebsite (websiteId){
             )
         })
         .then(function () {
+            //delete all pages for the website
             return pageModel
                 .deleteMany({_website: websiteId})
         });
@@ -59,6 +63,7 @@ function deleteWidget(pageId, widgetId) {
 
 function createPage(websiteId, page) {
     page._website = websiteId;
+
     return pageModel
         .create(page)
         .then(function (page) {
@@ -85,25 +90,27 @@ function findPageById(pageId) {
 
 function updatePage(pageId, page) {
     page.dateAccessed = Date.now();
+
     return pageModel.update({_id: pageId}, {$set: page});
 }
 
 function deletePage(pageId) {
     var widgetModel = require("../widget/widget.model.server");
     widgetModel.deleteWidgetsForPage(pageId);
+
     return pageModel
         .findById(pageId)
         .then(
             function (page) {
+                //delete current page document.
                 pageModel
                     .remove({_id: pageId})
                     .then(
                         function (status) {
+                            //delete current page reference in website.
                             return websiteModel.deletePage(page._website, pageId)
                         })
             })
-
-
 }
 
 function reArrangeWidgets(pageId, initial,final) {
@@ -115,6 +122,7 @@ function reArrangeWidgets(pageId, initial,final) {
                 if (initial === final) {
                     return page;
                 }
+                //re-arrange widgets reference in the page._widgets.
                 var widgetBuffer = page.widgets[initial];
                 page.widgets.splice(initial, 1);
                 page.widgets.splice(final, 0, widgetBuffer);

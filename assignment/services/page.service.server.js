@@ -1,8 +1,6 @@
 var app = require('../../express');
 var pageModel = require('../models/page/page.model.server');
 
-
-
 app.post('/api/website/:wid/page', createPage);
 app.get('/api/website/:wid/page', findAllPagesForWebsite);
 app.get('/api/page/:pid', findPageById);
@@ -21,7 +19,6 @@ function createPage(req, res) {
                 res.sendStatus(500);
             }
         )
-
 }
 
 function findAllPagesForWebsite(req, res) {
@@ -40,6 +37,7 @@ function findAllPagesForWebsite(req, res) {
 
 function findPageById(req, res) {
     var pid = req.params.pid + "";
+
     pageModel
         .findPageById(pid)
         .then(
@@ -55,6 +53,7 @@ function findPageById(req, res) {
 function updatePage(req, res) {
     var pid = req.params.pid + "";
     var page = req.body;
+
     pageModel
         .updatePage(pid, page)
         .then(
@@ -69,6 +68,7 @@ function updatePage(req, res) {
 }
 function deletePage(req, res) {
     var pid = req.params.pid + "";
+
     pageModel
         .deletePage(pid)
         .then(
