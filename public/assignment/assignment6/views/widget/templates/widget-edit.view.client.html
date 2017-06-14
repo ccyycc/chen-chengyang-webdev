@@ -1,0 +1,34 @@
+<!--header-->
+<div ng-include="'./views/common/header/one-col-header.view.client.html'"></div>
+<!--body-->
+<div ng-switch="model.widget.type" class="container-fluid">
+    <div ng-switch-when="HEADING">
+        <div ng-include="'./views/widget/templates/heading/widget-heading-edit.view.client.html'"></div>
+    </div>
+    <div ng-switch-when="YOUTUBE">
+        <div ng-include="'./views/widget/templates/youtube/widget-youtube-edit.view.client.html'"></div>
+    </div>
+    <div ng-switch-when="IMAGE">
+        <div ng-include="'./views/widget/templates/image/widget-image-edit.view.client.html'"></div>
+    </div>
+    <div ng-switch-when="HTML">
+        <div ng-include="'./views/widget/templates/html/widget-html-edit.view.client.html'"></div>
+    </div>
+    <div ng-switch-when="TEXT">
+        <div ng-include="'./views/widget/templates/text/widget-text-edit.view.client.html'"></div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div ng-show="model.mode != 'new'">
+        <a ng-click="model.deleteWidget()"
+           href=""
+           class="btn btn-block btn-danger">Delete</a>
+    </div>
+    <div ng-show="model.mode == 'new'">
+        <a href='#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget'
+           class="btn btn-block btn-danger">cancel</a>
+    </div>
+</div>
+<!--footer-->
+<div ng-include="'./views/common/footer/footer.view.client.html'"></div>

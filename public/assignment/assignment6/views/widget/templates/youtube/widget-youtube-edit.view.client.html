@@ -1,0 +1,33 @@
+<!--body-->
+<div class="theme-showcase first-row"
+     role="main">
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="name"
+           id="name"
+           ng-model="model.widget.name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="text"
+           ng-model="model.widget.text"
+           id="text"/>
+    <label for="width">Width</label>
+    <select id="width"
+            class="form-control"
+            data-ng-model="model.widget.width">
+        <option ng-repeat="width in model.widths"
+                ng-init="model.widget.width = model.widget.width || model.widths[0]"
+                ng-selected="model.widget.width == width" value="{{width}}">
+            {{width}}
+        </option>
+    </select>
+
+
+    <label for="url">Url</label>
+    <input id="url"
+           class="form-control"
+           placeholder="url"
+           ng-model="model.widget.url"/>
+
+</div>
