@@ -9,10 +9,6 @@
         <div class="col-xs-4 hidden-xs">
             <div class="container-fluid">
                 <!--left panel body-->
-                <h1>
-                    {{model.user.username}}
-                </h1>
-
                 <div class=" theme-showcase first-row"
                      role="main">
                     <ul class="list-group nowarp">
@@ -35,7 +31,7 @@
                         <li ng-repeat="page in model.pages" class="list-group-item">
                             <div class="row ">
                                 <div class="col-lg-4 col-md-7 col-xs-10 ">
-                                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}/widget">
+                                    <a href="#!/website/{{model.websiteId}}/page/{{page._id}}/widget">
                                         {{page.name}}
                                     </a>
                                 </div>
@@ -46,7 +42,7 @@
                                     {{page.dateAccessed | date}}
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{page._id}}">
+                                    <a href="#!/website/{{model.websiteId}}/page/{{page._id}}">
                                         <span class="glyphicon glyphicon-cog pull-right"></span>
                                     </a>
                                 </div>
@@ -73,7 +69,7 @@
                                                                             class="form-control"></textarea>
                 <!--delete button -->
                 <a ng-click="model.deletePage()"
-                   href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page"
+                   href="#!/website/{{model.websiteId}}/page"
                    class="btn btn-block btn-danger">Delete</a>
             </div>
         </div>

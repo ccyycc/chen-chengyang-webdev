@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('websiteListController', websiteListController);
 
-    function websiteListController($location, $routeParams, websiteService) {
+    function websiteListController($location, websiteService,currentUser) {
         var model = this;
         //event handler
         model.newWebsite = newWebsite;
@@ -12,7 +12,7 @@
 
         function init() {
             //instance
-            model.userId = $routeParams['uid'];
+            model.userId = currentUser._id;
             model.website = {};
 
             websiteService.findWebsitesByUser(model.userId)
@@ -27,13 +27,13 @@
 
             //header
             model.header = "Website List";
-            model.back = "#!/user/" + model.userId;
-            model.topRightOperationIcon = 'glyphicon glyphicon-plus'
+            model.back = "#!/profile";
+            model.topRightOperationIcon = 'glyphicon glyphicon-plus';
             model.topRightOperation = newWebsite;
         }
 
         function newWebsite() {
-            $location.url('/user/' + model.userId + '/website/new');
+            $location.url('/website/new');
         }
 
     }

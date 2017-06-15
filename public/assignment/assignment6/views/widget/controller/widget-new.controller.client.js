@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('widgetNewController', widgetNewController);
 
-    function widgetNewController($location, $routeParams, $sce) {
+    function widgetNewController($location, $routeParams, $sce, currentUser) {
         var model = this;
 
         model.trust = trust;
@@ -14,14 +14,14 @@
         init();
 
         function init() {
-            model.userId = $routeParams['uid'];
+            model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
             model.pageId = $routeParams['pid'];
             model.widgetId = $routeParams['wgid'];
 
             //header
             model.header = "Choose Widget";
-            model.back = "#!/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget";
+            model.back = "#!/website/" + model.websiteId + "/page/" + model.pageId + "/widget";
 
             model.topRightOperationIcon = '';
             model.topRightOperation = function () {};
@@ -29,7 +29,7 @@
 
         function createWidget(type) {
             model.widget = {"type": type};
-            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget/" + type + "#new");
+            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget/" + type + "#new");
         }
 
         function widgetUrl(widget) {

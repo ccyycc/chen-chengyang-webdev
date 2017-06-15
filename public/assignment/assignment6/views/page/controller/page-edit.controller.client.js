@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('pageEditController', pageEditController);
 
-    function pageEditController($location, $routeParams, pageService) {
+    function pageEditController($location, $routeParams, pageService,currentUser) {
         var model = this;
         //event handler.
         model.updatePage = updatePage;
@@ -12,7 +12,7 @@
         init();
 
         function init() {
-            model.userId = $routeParams['uid'];
+            model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
             model.pageId = $routeParams['pid'];
             pageService.findPageByWebsiteId(model.websiteId)
@@ -39,11 +39,11 @@
             //header
             //left panel
             model.leftHeader = "Page List";
-            model.leftBack = '#!/user/' + model.userId + "/website/" + model.websiteId + "/page";
+            model.leftBack = "#!/website/" + model.websiteId + "/page";
 
             //right panel
             model.rightHeader = "Edit page ";
-            model.rightBack = '#!/user/' + model.userId + "/website/" + model.websiteId + "/page";
+            model.rightBack = "#!/website/" + model.websiteId + "/page";
             model.rightTopRightOperationIcon = 'glyphicon glyphicon-ok';
             model.rightTopRightOperation = updatePage;
         }
@@ -60,11 +60,11 @@
 
 
         function navToPage() {
-            $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
+            $location.url("/website/" + model.websiteId + "/page");
         }
 
         function navToWebsite() {
-            $location.url('/user/' + model.userId + "/website/");
+            $location.url("/website");
         }
         function error(){
             alert("error, try again");

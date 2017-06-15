@@ -31,13 +31,13 @@
                 sendMessage("password is empty");
                 return
             }
-            var promise = userService.findUserByCredentials(model.username, model.password);
-            promise
+            userService
+                .login(model.username, model.password)
                 .then(successRender, errorRender)
         }
 
         function successRender(data) {
-            $location.url('/user/' + data._id);
+            $location.url('/profile');
         }
 
         function errorRender() {

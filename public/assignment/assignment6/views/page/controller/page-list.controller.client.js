@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('pageListController', pageListController);
 
-    function pageListController($location, $routeParams, pageService) {
+    function pageListController($location, $routeParams, pageService,currentUser) {
         var model = this;
         //event handler
         model.newPage = newPage;
@@ -11,7 +11,7 @@
         init();
 
         function init() {
-            model.userId = $routeParams['uid'];
+            model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
             model.pages = pageService.findPageByWebsiteId(model.websiteId)
                 .then(
@@ -20,19 +20,19 @@
                     },
                     function(){
                         alert("cannot find pages for websites");
-                        $location.url('/user/' + model.userId + '/website');
+                        $location.url('/website');
                     }
                 );
 
             //header
             model.header = "Page List";
-            model.back = "#!/user/" + model.userId + "/website/";
+            model.back = "/website/";
             model.topRightOperationIcon = 'glyphicon glyphicon-plus';
             model.topRightOperation = model.newPage;
         }
 
         function newPage() {
-            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/new");
+            $location.url('/website/' + model.websiteId + "/page/new");
         }
 
     }

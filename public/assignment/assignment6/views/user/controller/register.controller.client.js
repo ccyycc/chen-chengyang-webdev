@@ -14,7 +14,7 @@
             // header
             model.header = "Register";
             model.back = "#!/login";
-            model.topRightOperationIcon = 'glyphicon glyphicon-ok'
+            model.topRightOperationIcon = 'glyphicon glyphicon-ok';
             model.topRightOperation = model.register;
         }
 
@@ -33,9 +33,9 @@
                             username: model.username,
                             password: model.password
                         };
-                        userService.createWebsite(user)
+                        userService.register(user)
                             .then(function (user) {
-                                $location.url('/user/' + user._id);
+                                $location.url('/profile');
                             });
                     });
 
@@ -63,7 +63,7 @@
 
         function sendMessage(message) {
             model.message = message;
-            timeOut(1500);
+            timeOut(5000);
         }
 
         function timeOut(t) {

@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('widgetEditController', widgetEditController);
 
-    function widgetEditController($location, $routeParams, widgetService, $sce) {
+    function widgetEditController($location, $routeParams, widgetService, $sce,currentUser) {
         var model = this;
 
         model.updateWidget = updateWidget;
@@ -19,7 +19,7 @@
             model.widths = ["100%", "75%", "50%", "25%", "10%"];
             model.sizes = [6, 5, 4, 3, 2, 1];
 
-            model.userId = $routeParams['uid'];
+            model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
             model.pageId = $routeParams['pid'];
             model.widgetId = $routeParams['wgid'];
@@ -54,7 +54,6 @@
                             function () {
                                 alert("cannot find widget by id")
                             }
-                            // sendAlert("cannot find widget by id")
                         );
                 } else {
                     model.widget = bufferWidget.widget;
@@ -65,7 +64,7 @@
             }
 
 
-            model.back = "#!/user/" + model.userId + "/website/" + model.websiteId + "/page/" + model.pageId + "/widget";
+            model.back = "#!/website/" + model.websiteId + "/page/" + model.pageId + "/widget";
             model.topRightOperationIcon = 'glyphicon glyphicon-ok';
             model.topRightOperation = model.updateWidget;
 
@@ -82,7 +81,7 @@
                 widgetService.createWidget(model.pageId, model.widget)
                     .then(
                         function () {
-                            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+                            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
                         },
                         function () {
                             alert("create widget fail")
@@ -96,7 +95,7 @@
                 widgetService.updateWidget(model.widget._id, model.widget)
                     .then(
                         function () {
-                            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+                            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
                         },
                         function () {
                             alert("update widget fail")
@@ -113,7 +112,7 @@
                 widgetService.deleteWidget(model.widget._id)
                     .then(
                         function () {
-                            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+                            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
                         },
                         function () {
                             alert("delete widget fail")
@@ -149,8 +148,7 @@
 
 
         function widgetUrl(widget) {
-            var url = 'views/widget/templates/' + widget.type.toLowerCase() + '/widget-' + widget.type.toLowerCase() + '.view.client.html';
-            return url;
+            return 'views/widget/templates/' + widget.type.toLowerCase() + '/widget-' + widget.type.toLowerCase() + '.view.client.html';
         }
 
 
@@ -161,8 +159,7 @@
 
 
         function goToWidgetList(data) {
-            console.log("success");
-            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
         }
 
         function sendAlert(message) {

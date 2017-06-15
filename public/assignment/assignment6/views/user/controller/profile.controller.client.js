@@ -3,16 +3,17 @@
         .module('WebAppMaker')
         .controller('profileController', profileController);
 
-    function profileController($location, $routeParams, $timeout, userService) {
+    function profileController($location, $timeout, userService,currentUser) {
         var model = this;
         //event handler.
         model.updateProfile = updateProfile;
         model.deleteProfile = deleteProfile;
+        model.logout = logout;
         init();
 
         function init() {
-            model.userId = $routeParams['uid'];
-            model.user = findUserById(model.userId);
+            model.userId = currentUser._id;
+            model.user = currentUser;
             //header
             model.header = "Profile";
             model.back = "#!/login";
@@ -20,8 +21,16 @@
             model.topRightOperation = model.updateProfile;
         }
 
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
+
         function updateProfile() {
-            userService.updatePage(model.userId, model.user)
+            userService.updateUser(model.userId, model.user)
                 .then(function () {
                     sendMessage("profile updated");
                 }, function () {
@@ -37,10 +46,10 @@
 
         }
 
-        function findUserById(userId) {
-            userService.findPageById(userId)
-                .then(userRender, errorRender)
-        }
+        // function findUserById(userId) {
+        //     userService.findUserById(userId)
+        //         .then(userRender, errorRender)
+        // }
 
         function userRender(user) {
             model.user = user;
@@ -53,7 +62,7 @@
 
         function sendMessage(message) {
             model.message = message;
-            timeOut(1500);
+            timeOut(5000);
         }
 
         function timeOut(t) {

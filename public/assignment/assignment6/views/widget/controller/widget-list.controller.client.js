@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('widgetListController', widgetListController);
 
-    function widgetListController($location, $routeParams, widgetService, $sce) {
+    function widgetListController($location, $routeParams, widgetService, $sce,currentUser) {
         var model = this;
 
 
@@ -16,7 +16,7 @@
 
 
         function init() {
-            model.userId = $routeParams['uid'];
+            model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
             model.pageId = $routeParams['pid'];
             widgetService.findWidgetsByPageId(model.pageId)
@@ -32,19 +32,18 @@
 
             //header
             model.header = "Widget List";
-            model.back = "#!/user/" + model.userId + "/website/" + model.websiteId + "/page";
+            model.back = "#!/website/" + model.websiteId + "/page";
             model.topRightOperationIcon = 'glyphicon glyphicon-plus';
             model.topRightOperation = newWidget;
         }
 
 
         function editWidget(widget) {
-            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget/" + widget._id);
+            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget/" + widget._id);
         }
 
 
         function widgetUrl(widget) {
-            console.log(widget);
             var url = 'views/widget/templates/' + widget.type.toLowerCase() + '/widget-' + widget.type.toLowerCase() + '.view.client.html';
             return url;
         }
@@ -64,15 +63,15 @@
 
 
         function newWidget() {
-            $location.url('/user/' + model.userId + '/website/' + model.websiteId + "/page/" + model.pageId + "/widget/new");
+            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget/new");
         }
 
         function navToPage() {
-            $location.url('/user/' + model.userId + "/website/" + model.websiteId + "/page");
+            $location.url("/website/" + model.websiteId + "/page");
         }
 
         function navToWebsite() {
-            $location.url('/user/' + model.userId + "/website/");
+            $location.url("/website/");
         }
 
     }

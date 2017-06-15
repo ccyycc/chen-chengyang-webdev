@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('websiteNewController', websiteNewController);
 
-    function websiteNewController($location, $routeParams, websiteService) {
+    function websiteNewController($location, websiteService,currentUser) {
         var model = this;
         //event handler
         model.createNewWebsite = createNewWebsite;
@@ -12,7 +12,7 @@
 
         function init() {
             //initiating instance
-            model.userId = $routeParams['uid'];
+            model.userId = currentUser._id;
             websiteService.findWebsitesByUser(model.userId)
                 .then(
                     function (websites) {
@@ -24,13 +24,13 @@
                 );
             //header
             // left panel
-            model.leftBack = '#!/user/' + model.userId + "/website";
+            model.leftBack = "#!/website";
             model.leftHeader = "Website List";
             model.leftTopRightOperationIcon = 'glyphicon glyphicon-plus';
             // model.leftTopRightOperation = newWebsite;
 
             //right panel
-            model.rightBack = '#!/user/' + model.userId + "/website";
+            model.rightBack = "#!/website";
             model.rightHeader = "New Website ";
             model.rightTopRightOperationIcon = 'glyphicon glyphicon-ok';
             model.rightTopRightOperation = createNewWebsite;
@@ -43,7 +43,7 @@
         }
 
         function navToWebsite(){
-            $location.url('/user/' + model.userId + "/website");
+            $location.url("/website");
 
         }
         function error(){
