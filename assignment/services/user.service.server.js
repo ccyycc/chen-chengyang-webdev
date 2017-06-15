@@ -1,11 +1,31 @@
 var app = require('../../express');
 var userModel = require('../models/user/user.model.server');
 
-var passport      = require('passport');
+
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+
+// set up local strategy
 var LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(localStrategy));
+
+// facebook
+var facebookConfig = {
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET ,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    // clientID     : process.env.FACEBOOK_CLIENT_ID || "125709401345620" ,
+    // clientSecret : process.env.FACEBOOK_CLIENT_SECRET || "28ab44343a949aa4e892a04a700c2e92",
+    // callbackURL  : process.env.FACEBOOK_CALLBACK_URL || "http://localhost:3000/auth/facebook/callback"
+};
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+
+
+// set up cookie
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
+
 
 app.post('/api/user', createUser);
 app.get('/api/user', findAllUsers);
@@ -16,25 +36,86 @@ app.get('/api/user/:uid', findUserById);
 app.put('/api/user/:uid', updateUser);
 app.delete('/api/user/:uid', deleteUser);
 
-app.post  ('/api/assignment/login', passport.authenticate('local'), login);
-app.get   ('/api/assignment/isLoggedIn', isLoggedIn);
-app.post  ('/api/assignment/logout', logout);
-app.post  ('/api/assignment/register', register);
+app.post('/api/assignment/login', passport.authenticate('local'), login);
+app.get('/api/assignment/isLoggedIn', isLoggedIn);
+app.post('/api/assignment/logout', logout);
+app.post('/api/assignment/register', register);
+
+// ----------------------------------------------- facebook login ------------------------------------------------------
+
+app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/assignment/assignment6/index.html#!/profile',
+        failureRedirect: '/assignment/assignment6/index.html#!/login'
+    }));
 
 
+// ----------------------------------------------- strategy set up  ----------------------------------------------------
+function localStrategy(username, password, done) {
+    userModel
+        .findUserByCredentials(username, password)
+        .then(function (user) {
+            if (user) {
+                done(null, user);
+            } else {
+                done(null, false);
+            }
+        }, function (error) {
+            done(error, false);
+        });
+}
 
+function facebookStrategy(token, refreshToken, profile, done) {
+    console.log(typeof token)
+    console.log(typeof profile.id)
+
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var newFacebookUser = {
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        facebook: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newFacebookUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+}
+
+// ----------------------------------------------- cookie set up  ------------------------------------------------------
+// store an encrypted representation of the user in a cookie.
 function serializeUser(user, done) {
     done(null, user);
 }
-
+// retrieve the currently logged in user from the encrypted cookie
 function deserializeUser(user, done) {
     userModel
         .findUserById(user._id)
         .then(
-            function(user){
+            function (user) {
                 done(null, user);
             },
-            function(err){
+            function (err) {
                 done(err, null);
             }
         );
@@ -46,8 +127,8 @@ function register(req, res) {
         .createUser(userObj)
         .then(function (user) {
             req.login(user, function (status) {
-                    res.status(200).send("register successful and login");
-                });
+                res.status(200).send("register successful and login");
+            });
         });
 }
 
@@ -57,31 +138,18 @@ function logout(req, res) {
 }
 
 function isLoggedIn(req, res) {
-    if(req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
         res.json(req.user);
     } else {
         res.send('0');
     }
 }
 
-
-function localStrategy(username, password, done) {
-    userModel
-        .findUserByCredentials(username, password)
-        .then(function (user) {
-            if(user) {
-                done(null, user);
-            } else {
-                done(null, false);
-            }
-        }, function (error) {
-            done(error, false);
-        });
-}
-
 function login(req, res) {
     res.json(req.user);
 }
+
+
 
 
 

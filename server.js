@@ -1,7 +1,7 @@
 var app = require('./express');
 
 var cookieParser = require('cookie-parser');
-var session      = require('express-session');
+var session = require('express-session');
 var passport = require('passport');
 
 //body-parser for  parse json object from res.body
@@ -14,7 +14,9 @@ app.use(app.express.static(__dirname + '/public'));
 
 //security
 app.use(cookieParser());
-app.use(session({ secret: "put some text here" }));
+app.use(session({secret: process.env.SESSION_SECRET}));
+
+//configure and initialize passport and passport session
 app.use(passport.initialize());
 app.use(passport.session());
 
