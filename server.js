@@ -21,8 +21,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// database test module.
-require("./test/app.js");
+// // database test module.
+// require("./test/app.js");
 
 // server side module for assignment 4
 require('./assignment/app.js');
