@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('pageNewController', pageNewController);
 
-    function pageNewController($location, $routeParams, pageService,currentUser) {
+    function pageNewController($location, $routeParams, pageService, currentUser) {
         var model = this;
         //event handler
         model.createNewPage = createNewPage;
@@ -11,15 +11,16 @@
         init();
 
         function init() {
+            model.page = {};
             model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
-            
+
             pageService.findPageByWebsiteId(model.websiteId)
                 .then(
-                    function (pages){
+                    function (pages) {
                         model.pages = pages;
                     },
-                    function(){
+                    function () {
                         alert("cannot find pages with website id");
                         navToWebsite();
 
@@ -41,11 +42,15 @@
         }
 
         function createNewPage() {
-            model.page.wid = model.websiteId;
-            pageService.createPage(model.websiteId, model.page)
-                .then(navToPage,function(){
-                    alert("fail to create a page, please try again.")
-                });
+            if (model.page.name) {
+                model.page.wid = model.websiteId;
+                pageService.createPage(model.websiteId, model.page)
+                    .then(navToPage, function () {
+                        alert("fail to create a page, please try again.")
+                    });
+            } else {
+                model.errorMessage = "page name is require";
+            }
         }
 
         function navToWebsite() {

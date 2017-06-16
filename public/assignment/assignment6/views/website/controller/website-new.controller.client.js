@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('websiteNewController', websiteNewController);
 
-    function websiteNewController($location, websiteService,currentUser) {
+    function websiteNewController($location, websiteService, currentUser) {
         var model = this;
         //event handler
         model.createNewWebsite = createNewWebsite;
@@ -11,6 +11,7 @@
         init();
 
         function init() {
+            model.website = {};
             //initiating instance
             model.userId = currentUser._id;
             websiteService.findWebsitesByUser(model.userId)
@@ -38,15 +39,20 @@
         }
 
         function createNewWebsite() {
-            websiteService.createWebsite(model.userId, model.website)
-                .then(navToWebsite,error);
+            if (model.website.name) {
+                websiteService.createWebsite(model.userId, model.website)
+                    .then(navToWebsite, error);
+            } else {
+                model.errorMessage = "website name is require";
+            }
         }
 
-        function navToWebsite(){
+        function navToWebsite() {
             $location.url("/website");
 
         }
-        function error(){
+
+        function error() {
             alert("error, please try again");
         }
 

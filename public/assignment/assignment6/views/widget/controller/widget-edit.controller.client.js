@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('widgetEditController', widgetEditController);
 
-    function widgetEditController($location, $routeParams, widgetService, $sce,currentUser) {
+    function widgetEditController($location, $routeParams, widgetService, $sce, currentUser) {
         var model = this;
 
         model.updateWidget = updateWidget;
@@ -16,6 +16,7 @@
         init();
 
         function init() {
+
             model.widths = ["100%", "75%", "50%", "25%", "10%"];
             model.sizes = [6, 5, 4, 3, 2, 1];
 
@@ -77,32 +78,36 @@
 
         function updateWidget() {
 
-            if (model.widget._id == null) {
-                widgetService.createWidget(model.pageId, model.widget)
-                    .then(
-                        function () {
-                            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
-                        },
-                        function () {
-                            alert("create widget fail")
-                        }
-                        //             goToWidgetList,
-                        //             sendAlert("create widget fail !!!!!!")
-                    );
-
-            }
-            else {
-                widgetService.updateWidget(model.widget._id, model.widget)
-                    .then(
-                        function () {
-                            $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
-                        },
-                        function () {
-                            alert("update widget fail")
-                        }
-                        // goToWidgetList,
-                        // sendAlert("update Widget fail")
-                    );
+            if (model.widget && model.widget.name) {
+                console.log('valid name');
+                if (model.widget._id == null) {
+                    widgetService.createWidget(model.pageId, model.widget)
+                        .then(
+                            function () {
+                                $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+                            },
+                            function () {
+                                alert("create widget fail")
+                            }
+                            //             goToWidgetList,
+                            //             sendAlert("create widget fail !!!!!!")
+                        );
+                }
+                else {
+                    widgetService.updateWidget(model.widget._id, model.widget)
+                        .then(
+                            function () {
+                                $location.url('/website/' + model.websiteId + "/page/" + model.pageId + "/widget");
+                            },
+                            function () {
+                                alert("update widget fail")
+                            }
+                            // goToWidgetList,
+                            // sendAlert("update Widget fail")
+                        );
+                }
+            } else {
+                model.errorMessage = "widget name is require";
             }
         }
 

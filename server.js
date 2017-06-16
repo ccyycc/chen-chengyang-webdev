@@ -14,7 +14,12 @@ app.use(app.express.static(__dirname + '/public'));
 
 //security
 app.use(cookieParser());
-app.use(session({secret: process.env.SESSION_SECRET}));
+app.use(session(
+    {
+        secret: process.env.SESSION_SECRET,
+        resave: true,
+        saveUninitialized: true
+    }));
 
 //configure and initialize passport and passport session
 app.use(passport.initialize());

@@ -1,6 +1,7 @@
 var app = require('../../express');
 var userModel = require('../models/user/user.model.server');
 
+var bcrypt = require("bcrypt-nodejs");
 
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -13,7 +14,9 @@ passport.use(new LocalStrategy(localStrategy));
 var facebookConfig = {
     clientID     : process.env.FACEBOOK_CLIENT_ID,
     clientSecret : process.env.FACEBOOK_CLIENT_SECRET ,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+    profileFields: ['id', 'displayName', 'first_name','last_name','email']
+
     // clientID     : process.env.FACEBOOK_CLIENT_ID || "125709401345620" ,
     // clientSecret : process.env.FACEBOOK_CLIENT_SECRET || "28ab44343a949aa4e892a04a700c2e92",
     // callbackURL  : process.env.FACEBOOK_CALLBACK_URL || "http://localhost:3000/auth/facebook/callback"
@@ -54,9 +57,9 @@ app.get('/auth/facebook/callback',
 // ----------------------------------------------- strategy set up  ----------------------------------------------------
 function localStrategy(username, password, done) {
     userModel
-        .findUserByCredentials(username, password)
+        .findUserByUsername(username)
         .then(function (user) {
-            if (user) {
+            if(user && bcrypt.compareSync(password, user.password)){
                 done(null, user);
             } else {
                 done(null, false);
@@ -67,8 +70,7 @@ function localStrategy(username, password, done) {
 }
 
 function facebookStrategy(token, refreshToken, profile, done) {
-    console.log(typeof token)
-    console.log(typeof profile.id)
+    console.log(profile)
 
     userModel
         .findUserByFacebookId(profile.id)
@@ -78,8 +80,10 @@ function facebookStrategy(token, refreshToken, profile, done) {
                     return done(null, user);
                 } else {
                     var newFacebookUser = {
+                        username: profile.emails[0].value,
                         firstName: profile.name.givenName,
                         lastName:  profile.name.familyName,
+                        email: profile.emails[0].value,
                         facebook: {
                             id:    profile.id,
                             token: token
@@ -123,6 +127,8 @@ function deserializeUser(user, done) {
 
 function register(req, res) {
     var userObj = req.body;
+    userObj.password = bcrypt.hashSync(userObj.password);
+    console.log(userObj.password );
     userModel
         .createUser(userObj)
         .then(function (user) {

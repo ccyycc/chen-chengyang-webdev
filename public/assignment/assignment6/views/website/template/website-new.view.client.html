@@ -9,9 +9,7 @@
         <div class="col-xs-4 hidden-xs">
             <div class="container-fluid">
                 <!--left panel body-->
-                <h1>
-                    {{model.user.username}}
-                </h1>
+
 
                 <div class=" theme-showcase first-row"
                      role="main">
@@ -60,6 +58,10 @@
         <div class="col-xs-12 col-sm-8 ">
             <!--right panel body-->
             <div class="container-fluid">
+                <div ng-show = "model.errorMessage"
+                class="alert alert-danger">
+                    {{model.errorMessage}}
+                </div>
                 <!--edit website name-->
                 <label for="name-edit">Name</label> <input class="form-control"
                                                            ng-model="model.website.name"

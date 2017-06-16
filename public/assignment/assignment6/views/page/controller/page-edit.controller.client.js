@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('pageEditController', pageEditController);
 
-    function pageEditController($location, $routeParams, pageService,currentUser) {
+    function pageEditController($location, $routeParams, pageService, currentUser) {
         var model = this;
         //event handler.
         model.updatePage = updatePage;
@@ -17,20 +17,20 @@
             model.pageId = $routeParams['pid'];
             pageService.findPageByWebsiteId(model.websiteId)
                 .then(
-                    function (pages){
+                    function (pages) {
                         model.pages = pages;
                     },
-                    function(){
+                    function () {
                         alert("cannot find pages with website id");
                         navToWebsite();
                     }
                 );
             pageService.findPageById(model.pageId)
                 .then(
-                    function(page){
+                    function (page) {
                         model.page = page;
                     },
-                    function(){
+                    function () {
                         alert("cannot find page with page id");
                         navToPage();
                     }
@@ -49,13 +49,17 @@
         }
 
         function updatePage() {
-            pageService.updatePage(model.pageId, model.page)
-                .then(navToPage,error);
+            if (model.page.name) {
+                pageService.updatePage(model.pageId, model.page)
+                    .then(navToPage, error);
+            } else {
+                model.errorMessage = "page name is require";
+            }
         }
 
         function deletePage() {
             pageService.deletePage(model.pageId)
-                .then(navToPage,error);
+                .then(navToPage, error);
         }
 
 
@@ -66,10 +70,10 @@
         function navToWebsite() {
             $location.url("/website");
         }
-        function error(){
+
+        function error() {
             alert("error, try again");
         }
-
 
 
     }

@@ -3,7 +3,7 @@
         .module('WebAppMaker')
         .controller('websiteEditController', websiteEditController);
 
-    function websiteEditController($location, $routeParams, websiteService,currentUser) {
+    function websiteEditController($location, $routeParams, websiteService, currentUser) {
         var model = this;
 
         //event handler
@@ -50,8 +50,12 @@
         }
 
         function updateWebsite() {
-            websiteService.updateWebsite(model.websiteId, model.website)
-                .then(navToWebsite, error);
+            if (model.website.name) {
+                websiteService.updateWebsite(model.websiteId, model.website)
+                    .then(navToWebsite, error);
+            } else {
+                model.errorMessage = "website name is require";
+            }
         }
 
         function deleteWebsite() {
