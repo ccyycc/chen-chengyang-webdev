@@ -1,11 +1,12 @@
 <!--body-->
-<div class="container-fluid theme-showcase first-row"
-     role="main">
-    <label for="name">Name</label>
-    <input class="form-control"
-           placeholder="name"
-           ng-model="model.widget.name"
-           id="name"/>
+<div role = main>
+    <div class="form-group" ng-class="model.widgetNameStyle">
+        <label for="name">Name</label>
+        <input class="form-control"
+               placeholder="name"
+               ng-model="model.widget.name"
+               id="name"/>
+    </div>
 
     <label for="text">Text</label>
     <input class="form-control"

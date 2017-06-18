@@ -16,6 +16,7 @@
 
             model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
+            model.websiteNameStyle = "";
             websiteService.findWebsitesByUser(model.userId)
                 .then(
                     function (websites) {
@@ -50,11 +51,13 @@
         }
 
         function updateWebsite() {
+            model.websiteNameStyle = "";
             if (model.website.name) {
                 websiteService.updateWebsite(model.websiteId, model.website)
                     .then(navToWebsite, error);
             } else {
                 model.errorMessage = "website name is require";
+                model.websiteNameStyle = "has-error";
             }
         }
 

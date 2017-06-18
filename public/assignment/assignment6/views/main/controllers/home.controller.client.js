@@ -3,18 +3,25 @@
  */
 (function () {
     angular
-        .module('WAM')
+        .module('WebAppMaker')
         .controller('homeController', homeController);
 
-    function homeController($routeParams,
-                            $location,
-                            websiteService) {
+    function homeController( $route, userService, currentUser) {
         var model = this;
 
-        function init() {
-            $location.url("../templates/home.view.client.html");
-        }
+        model.logout = logout;
 
         init();
+        function init() {
+            model.username=currentUser.username;
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $route.reload();
+                });
+        }
     }
 })();

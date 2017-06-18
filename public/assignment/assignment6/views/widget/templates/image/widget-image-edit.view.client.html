@@ -1,57 +1,56 @@
+<label for="name">Name</label>
+<input class="form-control"
+       placeholder="name"
+       ng-model="model.widget.name"
+       id="name"/>
 
-    <label for="name">Name</label>
-    <input class="form-control"
-           placeholder="name"
-           ng-model="model.widget.name"
-           id="name"/>
+<label for="text">Text</label>
+<input class="form-control"
+       placeholder="text"
+       ng-model="model.widget.text"
+       id="text"/>
 
-    <label for="text">Text</label>
-    <input class="form-control"
-           placeholder="text"
-           ng-model="model.widget.text"
-           id="text"/>
-
-    <label for="width">Width</label>
-    <select id="width"
-            class="form-control"
-            data-ng-model="model.widget.width">
-        <option ng-repeat="width in model.widths"
-                ng-init="model.widget.width = model.widget.width || model.widths[0]"
-                ng-selected="model.widget.width == width" value="{{width}}">
-            {{width}}
-        </option>
-    </select>
-
-
-    <label for="url">Url</label>
-    <input id="url"
-           class="form-control"
-           placeholder="url"
-           ng-model="model.widget.url"/>
+<label for="width">Width</label>
+<select id="width"
+        class="form-control"
+        data-ng-model="model.widget.width">
+    <option ng-repeat="width in model.widths"
+            ng-init="model.widget.width = model.widget.width || model.widths[0]"
+            ng-selected="model.widget.width == width" value="{{width}}">
+        {{width}}
+    </option>
+</select>
 
 
-    <a class="btn btn-success btn-block wd-action-Button"
-       ng-click="model.topRightOperation()">
-        Save
-    </a>
+<label for="url">Url</label>
+<input id="url"
+       class="form-control"
+       placeholder="url"
+       ng-model="model.widget.url"/>
 
 
-    <!--<form action="/api/upload" method="post" enctype="multipart/form-data">-->
-    <form action="/api/upload" method="post" enctype="multipart/form-data">
-        <input name="myFile" type="file" class="form-control" accept="image/*"/>
-        <input name="width" value="{{model.widget.width}}" style="display: none"/>
-        <input name="userId" value="{{model.userId}}" style="display: none"/>
-        <input name="websiteId" value="{{model.websiteId}}" style="display: none"/>
-        <input name="pageId" value="{{model.pageId}}" style="display: none"/>
-        <input name="widgetId" value="{{model.widget._id}}" style="display: none"/>
-        <button type="submit" class="btn btn-block btn-primary wd-action-Button">Upload Image & Save </button>
-    </form>
+<a class="btn btn-success btn-block wd-action-Button"
+   ng-click="model.topRightOperation()">
+    Save
+</a>
 
-    <a class="btn btn-info btn-block wd-action-Button"
-       ng-click="model.searchOnFlickr()">
-        <!--href="#!/widget/{{model.widget._id}}/search">-->
-        Search on flickr
-    </a>
+
+<!--<form action="/api/upload" method="post" enctype="multipart/form-data">-->
+<form action="/api/upload" method="post" enctype="multipart/form-data">
+    <input name="myFile" type="file" class="form-control" accept="image/*"/>
+    <input name="width" value="{{model.widget.width}}" style="display: none"/>
+    <input name="userId" value="{{model.userId}}" style="display: none"/>
+    <input name="websiteId" value="{{model.websiteId}}" style="display: none"/>
+    <input name="pageId" value="{{model.pageId}}" style="display: none"/>
+    <input name="widgetId" value="{{model.widget._id}}" style="display: none"/>
+    <button type="submit" class="btn btn-block btn-primary wd-action-Button">Upload Image & Save</button>
+</form>
+
+<a class="btn btn-info btn-block wd-action-Button"
+   ng-click="model.searchOnFlickr()">
+    <!--href="#!/widget/{{model.widget._id}}/search">-->
+    Search on flickr
+</a>
 
 
 

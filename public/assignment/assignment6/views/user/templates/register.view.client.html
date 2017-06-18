@@ -11,31 +11,40 @@
 
     <form>
         <!--enter user name -->
-        <div class="form-group">
+        <div class="form-group " ng-class="model.usernameStyle">
             <label for="username">Username</label>
             <input ng-model="model.username"
+                   autocorrect="off"
+                   autocapitalize="off"
                    type="text"
                    id="username"
                    class="form-control"
                    placeholder="user123"/>
+            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
         <!--enter password-->
-        <div class="form-group">
+        <div class="form-group" ng-class="model.passwordSytle">
             <label for="password">Password</label>
             <input ng-model="model.password"
+                   autocorrect="off"
+                   autocapitalize="off"
                    type="password"
                    id="password"
                    class="form-control"
                    placeholder="password123"/>
+            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
         <!--re-enter password-->
-        <div class="form-group">
-            <label for="reEnterPassword">Re-enter password</label>
+        <div class="form-group" ng-class="model.repasswordStyle">
+            <label for="reEnterPassword" >Re-enter password</label>
             <input ng-model="model.reEnterPassword"
+                   autocorrect="off"
+                   autocapitalize="off"
                    type="password"
                    id="reEnterPassword"
                    class="form-control"
                    placeholder="password123"/>
+            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
         </div>
     </form>
 

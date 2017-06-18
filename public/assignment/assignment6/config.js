@@ -6,7 +6,12 @@
     function configuration($routeProvider) {
         $routeProvider
             .when('/', {
-                templateUrl: "views/main/templates/home.view.client.html"
+                templateUrl: "views/main/templates/home.view.client.html",
+                controller: 'homeController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
 
             .when('/login', {
@@ -125,20 +130,19 @@
         return deferred.promise;
     }
 
-    // function checkCurrentUser(userService, $q, $location) {
-    //     var deferred = $q.defer();
-    //
-    //     userService
-    //         .loggedin()
-    //         .then(function (user) {
-    //             if (user === '0') {
-    //                 deferred.resolve({});
-    //                 // $location.url('/login');
-    //             } else {
-    //                 deferred.resolve(user);
-    //             }
-    //         });
-    //
-    //     return deferred.promise;
-    // }
+    function checkCurrentUser(userService, $q) {
+        var deferred = $q.defer();
+
+        userService
+            .isLoggedIn()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.resolve({});
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+
+        return deferred.promise;
+    }
 })();

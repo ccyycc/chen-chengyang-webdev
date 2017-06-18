@@ -60,11 +60,13 @@
                     {{model.errorMessage}}
                 </div>
                 <!--edit website name-->
+                <div class="form-group" ng-class="model.websiteNameStyle">
                 <label for="name-edit">Name</label>
                 <input class="form-control"
                        placeholder="facebook"
                        ng-model="model.website.name"
                        id="name-edit"/>
+                </div>
                 <!--edit website description-->
                 <label for="description-edit">Description</label>
                 <textarea id="description-edit"

@@ -11,6 +11,7 @@
         init();
 
         function init() {
+            resetHighLight();
             // header
             model.header = "Register";
             model.back = "#!/login";
@@ -41,29 +42,53 @@
 
         }
 
+        function resetHighLight() {
+            model.usernameStyle = "";
+            model.passwordSytle = "";
+            model.repasswordStyle = "";
+        }
+
         function isValid(username, password, reptPassword) {
-            if (username == null || username == "") {
-                sendMessage("please enter username")
-                return false;
+
+            resetHighLight();
+            model.message = "";
+            var valid = true;
+            if (username === undefined || username === null || username === "") {
+                appendMessage("username  is required");
+                model.usernameStyle = "has-error has-feedback";
+                valid = false;
             }
-            if (password == null || password == "") {
-                sendMessage("please enter password")
-                return false;
+            if (password === undefined || password === null || password === "") {
+                appendMessage("password is required");
+                model.passwordSytle = "has-error has-feedback";
+                valid = false;
+
             }
-            if (reptPassword == null || reptPassword == "") {
-                sendMessage("please re-enter password");
-                return false;
+            if (reptPassword === undefined || reptPassword === null || reptPassword === "") {
+                appendMessage("re-enter password is required");
+                model.repasswordStyle = "has-error has-feedback";
+                valid = false;
             }
-            if (password !== reptPassword) {
-                sendMessage("password is not equal.");
-                return false;
+
+            if (valid && password !== reptPassword) {
+                appendMessage("passwords does not match.");
+                model.passwordSytle = "has-error has-feedback";
+                model.repasswordStyle = "has-error has-feedback";
+                valid = false;
             }
-            return true;
+            if (model.message.length > 1) {
+                model.message = model.message.substr(1);
+                timeOut(5000);
+            }
+            return valid;
         }
 
         function sendMessage(message) {
             model.message = message;
-            timeOut(5000);
+        }
+
+        function appendMessage(message) {
+            model.message += (';' + message);
         }
 
         function timeOut(t) {

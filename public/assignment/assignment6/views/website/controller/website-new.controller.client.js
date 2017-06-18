@@ -11,6 +11,7 @@
         init();
 
         function init() {
+            model.websiteNameStyle = "";
             model.website = {};
             //initiating instance
             model.userId = currentUser._id;
@@ -44,6 +45,7 @@
                     .then(navToWebsite, error);
             } else {
                 model.errorMessage = "website name is require";
+                model.websiteNameStyle = "has-error";
             }
         }
 

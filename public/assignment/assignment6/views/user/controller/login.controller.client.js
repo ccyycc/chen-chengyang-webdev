@@ -13,6 +13,7 @@
         init();
 
         function init() {
+            resetHighLight();
             //header
             model.header = "Login";
             model.back = "#!/";
@@ -20,20 +21,39 @@
             model.topRightOperation = model.register;
         }
 
+        function resetHighLight() {
+            model.usernameStyle = "";
+            model.passwordSytle = "";
+        }
+
 
         function login() {
-            if (model.username == null) {
-                sendMessage("username is empty");
-                timeOut(2000);
-                return;
+            resetHighLight();
+            var valid = true;
+            model.message = "";
+
+            if (model.username === undefined || model.username === "") {
+                appendMessage("username is required");
+                model.usernameStyle = "has-error has-feedback";
+                valid = false;
             }
-            if (model.password == null) {
-                sendMessage("password is empty");
-                return
+            if (model.password === undefined || model.password === "") {
+                appendMessage("password is required");
+                model.passwordSytle = "has-error has-feedback";
+                valid = false;
             }
-            userService
-                .login(model.username, model.password)
-                .then(successRender, errorRender)
+            if (valid) {
+                userService
+                    .login(model.username, model.password)
+                    .then(successRender, errorRender)
+            }else{
+                model.message=model.message.substr(1);
+                timeOut(5000);
+            }
+        }
+
+        function appendMessage(message) {
+            model.message += (';' + message);
         }
 
         function successRender(data) {
@@ -42,6 +62,9 @@
 
         function errorRender() {
             sendMessage("User is not found or password is incorrect.");
+            model.usernameStyle = "has-error has-feedback";
+            model.passwordSytle = "has-error has-feedback";
+
         }
 
         function register() {

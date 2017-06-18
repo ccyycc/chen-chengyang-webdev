@@ -26,7 +26,7 @@
 
             //header
             model.header = "Page List";
-            model.back = "/website/";
+            model.back = "#!/website/";
             model.topRightOperationIcon = 'glyphicon glyphicon-plus';
             model.topRightOperation = model.newPage;
         }

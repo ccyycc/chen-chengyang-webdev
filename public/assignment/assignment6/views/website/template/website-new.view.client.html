@@ -58,24 +58,31 @@
         <div class="col-xs-12 col-sm-8 ">
             <!--right panel body-->
             <div class="container-fluid">
-                <div ng-show = "model.errorMessage"
-                class="alert alert-danger">
+                <div ng-show="model.errorMessage"
+                     class="alert alert-danger">
                     {{model.errorMessage}}
                 </div>
-                <!--edit website name-->
-                <label for="name-edit">Name</label> <input class="form-control"
-                                                           ng-model="model.website.name"
-                                                           placeholder="Name"
-                                                           id="name-edit"/>
-                <!--edit website description-->
-                <label for="description-edit">Description</label> <textarea id="description-edit"
-                                                                            rows="5"
-                                                                            ng-model="model.website.description"
-                                                                            placeholder="Description"
-                                                                            class="form-control"></textarea>
-                <!--cancel button -->
-                <a href="#!/user/{{model.userId}}/website"
-                   class="btn btn-block btn-danger">Cancel</a>
+                <form>
+                    <!--edit website name-->
+                    <div class="form-group" ng-class="model.websiteNameStyle">
+                        <label for="name-edit">Name</label>
+                        <input class="form-control"
+                               ng-model="model.website.name"
+                               placeholder="Name"
+                               id="name-edit"/>
+                    </div>
+                    <!--edit website description-->
+                    <label for="description-edit">Description</label>
+                    <textarea id="description-edit"
+                              rows="5"
+                              ng-model="model.website.description"
+                              placeholder="Description"
+                              class="form-control"></textarea>
+                    <!--cancel button -->
+                    <a href="#!/user/{{model.userId}}/website"
+                       class="btn btn-block btn-danger">Cancel</a>
+                </form>
+
             </div>
         </div>
     </div>

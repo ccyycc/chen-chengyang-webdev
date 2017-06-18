@@ -15,6 +15,7 @@
             model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
             model.pageId = $routeParams['pid'];
+            model.pageNameStyle = "";
             pageService.findPageByWebsiteId(model.websiteId)
                 .then(
                     function (pages) {
@@ -49,11 +50,13 @@
         }
 
         function updatePage() {
+            model.pageNameStyle = "";
             if (model.page.name) {
                 pageService.updatePage(model.pageId, model.page)
                     .then(navToPage, error);
             } else {
                 model.errorMessage = "page name is require";
+                model.pageNameStyle = "has-error";
             }
         }
 

@@ -24,8 +24,12 @@
             model.websiteId = $routeParams['wid'];
             model.pageId = $routeParams['pid'];
             model.widgetId = $routeParams['wgid'];
+
+            model.widgetNameStyle = "";
+
             model.preSelectedSize = false;
             model.mode = $location.hash();
+
             var bufferWidget = widgetService.getTmpWidget();
 
             if (model.mode === "new") {
@@ -77,7 +81,8 @@
         }
 
         function updateWidget() {
-
+            model.widgetNameStyle = "";
+            
             if (model.widget && model.widget.name) {
                 console.log('valid name');
                 if (model.widget._id == null) {
@@ -108,6 +113,7 @@
                 }
             } else {
                 model.errorMessage = "widget name is require";
+                model.widgetNameStyle = "has-error";
             }
         }
 

@@ -1,23 +1,24 @@
-<div class="theme-showcase first-row"
-     role="main">
-    <label for="name">Name</label>
-    <input class="form-control"
-           placeholder="name"
-           ng-model="model.widget.name"
-           id="name"/>
+<div role=main>
+    <div class="form-group" ng-class="model.widgetNameStyle">
+        <label for="name">Name</label>
+        <input class="form-control"
+               placeholder="name"
+               ng-model="model.widget.name"
+               id="name"/>
+    </div>
+</div>
 
-    <!--<label for="text">Text</label>-->
-    <!--<textarea class="form-control"-->
-    <!--placeholder="html code"-->
-    <!--data-ng-model="model.widget.text"-->
-    <!--id="text"-->
-    <!--rows="10"></textarea>-->
-    <label for="text">Text</label>
-    <div id="text"
-         ng-model="model.widget.text"
-         text-angular
-         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+<!--<label for="text">Text</label>-->
+<!--<textarea class="form-control"-->
+<!--placeholder="html code"-->
+<!--data-ng-model="model.widget.text"-->
+<!--id="text"-->
+<!--rows="10"></textarea>-->
+<label for="text">Text</label>
+<div id="text"
+     ng-model="model.widget.text"
+     text-angular
+     ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
         ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
         ['indent','outdent'],['html']]">
-    </div>
 </div>

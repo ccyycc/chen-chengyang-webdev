@@ -14,6 +14,7 @@
             model.page = {};
             model.userId = currentUser._id;
             model.websiteId = $routeParams['wid'];
+            model.pageNameStyle = "";
 
             pageService.findPageByWebsiteId(model.websiteId)
                 .then(
@@ -42,6 +43,7 @@
         }
 
         function createNewPage() {
+            model.pageNameStyle = "";
             if (model.page.name) {
                 model.page.wid = model.websiteId;
                 pageService.createPage(model.websiteId, model.page)
@@ -50,6 +52,7 @@
                     });
             } else {
                 model.errorMessage = "page name is require";
+                model.pageNameStyle = "has-error";
             }
         }
 
