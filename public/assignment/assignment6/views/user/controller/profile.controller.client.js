@@ -16,7 +16,7 @@
             model.user = currentUser;
             //header
             model.header = "Profile";
-            model.back = "#!/login";
+            model.back = "#!/";
             model.topRightOperationIcon = 'glyphicon glyphicon-ok';
             model.topRightOperation = model.updateProfile;
         }

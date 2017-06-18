@@ -70,8 +70,6 @@ function localStrategy(username, password, done) {
 }
 
 function facebookStrategy(token, refreshToken, profile, done) {
-    console.log(profile)
-
     userModel
         .findUserByFacebookId(profile.id)
         .then(
